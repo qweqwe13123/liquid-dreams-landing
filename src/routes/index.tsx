@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { JackPortfolio } from "@/components/jack/JackPortfolio";
 
 export const Route = createFileRoute("/")({
@@ -37,7 +38,7 @@ function Index() {
         </a>
         <div className="hidden items-center gap-8 md:flex">
           <a href="#" className="text-sm text-foreground transition-colors">Home</a>
-          <a href="#services" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Services</a>
+          <Link to="/services" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Services</Link>
           <a href="#" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Studio</a>
           <a href="#" className="text-sm text-muted-foreground transition-colors hover:text-foreground">About</a>
           <a href="#" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Journal</a>
