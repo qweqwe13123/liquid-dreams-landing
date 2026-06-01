@@ -1,6 +1,7 @@
 import { FadeIn } from "./FadeIn";
+import { Link } from "@tanstack/react-router";
 
-const SERVICES = [
+const ALL_SERVICES = [
   { n: "01", name: "Web & App Development", desc: "Custom websites, web applications, and mobile experiences built to support growth and deliver exceptional user experiences." },
   { n: "02", name: "Virtual Receptionist", desc: "24/7 call handling, appointment scheduling, lead qualification, and customer support without increasing payroll costs." },
   { n: "03", name: "Business Automation", desc: "Streamlined systems that reduce manual work, improve efficiency, and help businesses operate at scale." },
@@ -17,7 +18,10 @@ const SERVICES = [
   { n: "14", name: "Maintenance & Support", desc: "Ongoing technical support, updates, monitoring, and optimization to ensure long-term reliability and performance." },
 ];
 
-export function ServicesSection() {
+export { ALL_SERVICES };
+
+export function ServicesSection({ full = false }: { full?: boolean } = {}) {
+  const items = full ? ALL_SERVICES : ALL_SERVICES.slice(0, 6);
   return (
     <section
       id="services"
@@ -31,7 +35,7 @@ export function ServicesSection() {
         Services
       </h2>
       <div className="max-w-5xl mx-auto">
-        {SERVICES.map((s, i) => (
+        {items.map((s, i) => (
           <FadeIn
             key={s.n}
             delay={i * 0.1}
@@ -58,6 +62,17 @@ export function ServicesSection() {
           </FadeIn>
         ))}
       </div>
+      {!full && (
+        <div className="max-w-5xl mx-auto mt-12 sm:mt-16 flex justify-center">
+          <Link
+            to="/services"
+            className="inline-flex items-center gap-3 rounded-full border-2 border-[#0C0C0C] px-8 sm:px-10 py-4 sm:py-5 font-medium uppercase tracking-wider transition-transform hover:scale-[1.03]"
+            style={{ fontSize: "clamp(0.85rem, 1.4vw, 1.05rem)" }}
+          >
+            View all services →
+          </Link>
+        </div>
+      )}
     </section>
   );
 }
