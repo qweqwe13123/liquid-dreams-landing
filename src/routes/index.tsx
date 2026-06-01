@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { JackPortfolio } from "@/components/jack/JackPortfolio";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -60,6 +61,7 @@ function Index() {
           Begin Journey
         </button>
       </section>
+      <JackPortfolio />
     </div>
   );
 }
