@@ -37,6 +37,7 @@ function Index() {
         </a>
         <div className="hidden items-center gap-8 md:flex">
           <a href="#" className="text-sm text-foreground transition-colors">Home</a>
+          <a href="#services" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Services</a>
           <a href="#" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Studio</a>
           <a href="#" className="text-sm text-muted-foreground transition-colors hover:text-foreground">About</a>
           <a href="#" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Journal</a>
