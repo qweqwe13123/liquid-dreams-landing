@@ -1,104 +1,20 @@
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { LiveProjectButton } from "./LiveProjectButton";
+import { ProjectVideoFrame } from "./ProjectVideoFrame";
 
-interface Project {
-  n: string;
-  category: string;
-  name: string;
-  col1a: string;
-  col1b: string;
-  col2: string;
-  video: string;
-  videoType: string;
-}
+import video1 from "@/video/Video Project 1 copy.mp4";
+import video2 from "@/video/Screen Recording 2026-06-01 at 11.35.32 PM.MOV";
+import video3 from "@/video/copy_8F24B367-2150-405E-BFE2-44EAB65AE0B8.MOV";
 
-const PROJECTS: Project[] = [
-  {
-    n: "01",
-    category: "Client",
-    name: "Nextlevel Studio",
-    col1a: "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055344_5eff02e0-87a5-41ce-b64f-eb08da8f33db.png&w=1280&q=85",
-    col1b: "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055431_11d841fd-8b41-46a5-82e4-b04f2407a7d8.png&w=1280&q=85",
-    col2: "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055451_e317bf2d-28d4-48cc-86b0-6f72f25b6327.png&w=1280&q=85",
-    video: "/videos/project1.mp4",
-    videoType: "video/mp4",
-  },
-  {
-    n: "02",
-    category: "Personal",
-    name: "Aura Brand Identity",
-    col1a: "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055654_911201c5-36d9-4bc6-bac7-331adfce159f.png&w=1280&q=85",
-    col1b: "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055723_5ceda0b8-d9c2-4665-b2e3-83ba19ba76d1.png&w=1280&q=85",
-    col2: "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055753_adc5dcbd-a8e6-49c0-b43a-9b030d835cea.png&w=1280&q=85",
-    video: "/videos/project2.mov",
-    videoType: "video/quicktime",
-  },
-  {
-    n: "03",
-    category: "Client",
-    name: "Solaris Digital",
-    col1a: "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055759_963cfb0b-4bd1-4b0f-9d0a-09bd6cf95b2f.png&w=1280&q=85",
-    col1b: "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_060108_438f781a-9846-4dcc-89ab-c4e6cb830f5b.png&w=1280&q=85",
-    col2: "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055818_9d062121-ad7e-46b9-999a-1a6a692ef1ee.png&w=1280&q=85",
-    video: "/videos/project3.mov",
-    videoType: "video/quicktime",
-  },
-];
-
-function Card({ project, index, total, progress }: { project: Project; index: number; total: number; progress: ReturnType<typeof useScroll>["scrollYProgress"]; }) {
-  const targetScale = 1 - (total - 1 - index) * 0.03;
-  const range: [number, number] = [index / total, 1];
-  const scale = useTransform(progress, range, [1, targetScale]);
-
-  return (
-    <div className="sticky top-24 md:top-32" style={{ top: `${index * 28 + 96}px` }}>
-      <motion.div
-        style={{ scale, background: "#0C0C0C" }}
-        className="rounded-[40px] sm:rounded-[50px] md:rounded-[60px] border-2 border-[#D7E2EA] p-4 sm:p-6 md:p-8"
-      >
-        <div className="flex items-center justify-between gap-4 flex-wrap mb-6">
-          <div className="flex items-center gap-6">
-            <div className="font-black hero-heading" style={{ fontSize: "clamp(2.5rem, 7vw, 100px)", lineHeight: 0.9 }}>
-              {project.n}
-            </div>
-            <div className="flex flex-col">
-              <span className="text-[#D7E2EA]/60 uppercase tracking-widest text-xs sm:text-sm">{project.category}</span>
-              <span className="text-[#D7E2EA] font-medium uppercase" style={{ fontSize: "clamp(1rem, 2vw, 1.75rem)" }}>{project.name}</span>
-            </div>
-          </div>
-          <LiveProjectButton />
-        </div>
-        <div className="flex gap-3 sm:gap-4">
-          <div className="flex flex-col gap-3 sm:gap-4" style={{ flex: "0 0 40%" }}>
-            <img src={project.col1a} alt="" loading="lazy" className="w-full object-cover rounded-[40px] sm:rounded-[50px] md:rounded-[60px]" style={{ height: "clamp(130px, 16vw, 230px)" }} />
-            <img src={project.col1b} alt="" loading="lazy" className="w-full object-cover rounded-[40px] sm:rounded-[50px] md:rounded-[60px]" style={{ height: "clamp(160px, 22vw, 340px)" }} />
-          </div>
-          <div style={{ flex: "0 0 60%" }} className="ml-auto">
-            <video
-              src={project.video}
-              poster={project.col2}
-              autoPlay
-              loop
-              muted
-              playsInline
-              preload="metadata"
-              className="w-full h-full object-cover rounded-[40px] sm:rounded-[50px] md:rounded-[60px]"
-            />
-          </div>
-        </div>
-      </motion.div>
-    </div>
-  );
-}
+const PROJECTS = [
+  { n: "01", category: "Client", name: "Nextlevel Studio", video: video1 },
+  { n: "02", category: "Personal", name: "Aura Brand Identity", video: video2 },
+  { n: "03", category: "Client", name: "Solaris Digital", video: video3 },
+] as const;
 
 export function ProjectsSection() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
-
   return (
     <section
-      ref={ref}
       className="rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] -mt-10 sm:-mt-12 md:-mt-14 relative z-10 px-5 sm:px-8 md:px-10 py-20"
       style={{ background: "#0C0C0C", fontFamily: "'Kanit', sans-serif" }}
     >
@@ -108,13 +24,74 @@ export function ProjectsSection() {
       >
         Project
       </h2>
-      <div>
-        {PROJECTS.map((p, i) => (
-          <div key={p.n} className="h-[85vh]">
-            <Card project={p} index={i} total={PROJECTS.length} progress={scrollYProgress} />
+
+      <motion.div
+        initial={{ opacity: 0, y: 48 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-60px" }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        className="rounded-[40px] sm:rounded-[50px] md:rounded-[60px] border-2 border-[#D7E2EA] p-4 sm:p-6 md:p-8 max-w-7xl mx-auto"
+        style={{ background: "#0C0C0C" }}
+      >
+        <div className="flex items-center justify-between gap-4 flex-wrap mb-8">
+          <div className="flex flex-wrap gap-x-10 gap-y-4">
+            {PROJECTS.map((project, i) => (
+              <motion.div
+                key={project.n}
+                className="flex items-center gap-4"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <span
+                  className="font-black hero-heading text-[#D7E2EA]/40"
+                  style={{ fontSize: "clamp(1.5rem, 4vw, 48px)", lineHeight: 1 }}
+                >
+                  {project.n}
+                </span>
+                <div className="flex flex-col">
+                  <span className="text-[#D7E2EA]/60 uppercase tracking-widest text-xs sm:text-sm">
+                    {project.category}
+                  </span>
+                  <span
+                    className="text-[#D7E2EA] font-medium uppercase"
+                    style={{ fontSize: "clamp(0.75rem, 1.5vw, 1.25rem)" }}
+                  >
+                    {project.name}
+                  </span>
+                </div>
+              </motion.div>
+            ))}
           </div>
-        ))}
-      </div>
+          <LiveProjectButton />
+        </div>
+
+        <div className="flex gap-3 sm:gap-4">
+          <div className="flex flex-col gap-3 sm:gap-4" style={{ flex: "0 0 40%" }}>
+            <ProjectVideoFrame
+              src={PROJECTS[0].video}
+              objectPosition="center"
+              delay={0.05}
+              style={{ height: "clamp(130px, 16vw, 230px)" }}
+            />
+            <ProjectVideoFrame
+              src={PROJECTS[1].video}
+              objectPosition="center"
+              delay={0.18}
+              style={{ height: "clamp(160px, 22vw, 340px)" }}
+            />
+          </div>
+          <div style={{ flex: "0 0 60%" }} className="ml-auto">
+            <ProjectVideoFrame
+              src={PROJECTS[2].video}
+              objectPosition="center"
+              delay={0.3}
+              className="h-full min-h-[clamp(280px,38vw,580px)]"
+            />
+          </div>
+        </div>
+      </motion.div>
     </section>
   );
 }
