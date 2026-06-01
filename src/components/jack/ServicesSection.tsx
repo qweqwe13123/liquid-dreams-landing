@@ -1,16 +1,26 @@
 import { FadeIn } from "./FadeIn";
 
 const SERVICES = [
-  { n: "01", name: "3D Modeling", desc: "Creation of detailed objects, characters, or environments tailored to specific client needs, ideal for games, products, and visualizations." },
-  { n: "02", name: "Rendering", desc: "High-quality, photorealistic renders that showcase designs with custom lighting, textures, and materials to bring concepts to life." },
-  { n: "03", name: "Motion Design", desc: "Dynamic animations and motion graphics that add energy and storytelling to brands, products, and digital experiences." },
-  { n: "04", name: "Branding", desc: "Crafting cohesive visual identities -- from logos to full brand systems -- that communicate a clear and memorable presence." },
-  { n: "05", name: "Web Design", desc: "Designing clean, modern, and conversion-focused websites with attention to layout, typography, and user experience." },
+  { n: "01", name: "Web & App Development", desc: "Custom websites, web applications, and mobile experiences built to support growth and deliver exceptional user experiences." },
+  { n: "02", name: "Virtual Receptionist", desc: "24/7 call handling, appointment scheduling, lead qualification, and customer support without increasing payroll costs." },
+  { n: "03", name: "Business Automation", desc: "Streamlined systems that reduce manual work, improve efficiency, and help businesses operate at scale." },
+  { n: "04", name: "Digital Operations", desc: "Integrated business systems that manage customer interactions, internal processes, and day-to-day operations within a unified digital ecosystem." },
+  { n: "05", name: "Branding & Web Design", desc: "Premium visual identities and conversion-focused digital experiences designed to build trust, strengthen brand perception, and drive growth." },
+  { n: "06", name: "Payment Systems", desc: "Secure payment infrastructures, subscription platforms, invoicing systems, and custom checkout experiences designed to simplify transactions and maximize revenue." },
+  { n: "07", name: "Content Automation", desc: "Automated content creation and publishing systems that help businesses maintain a consistent and engaging online presence." },
+  { n: "08", name: "Reputation Management", desc: "Systems designed to increase customer reviews, strengthen online credibility, and improve brand perception across digital platforms." },
+  { n: "09", name: "CRM & Workflow Integration", desc: "Connecting business tools, customer data, and internal processes into a unified and efficient operational ecosystem." },
+  { n: "10", name: "Motion Design", desc: "High-end animations and motion experiences that bring products, brands, and digital interfaces to life." },
+  { n: "11", name: "3D Visualization", desc: "Premium 3D assets, product visualizations, and immersive experiences created for marketing, presentations, and digital platforms." },
+  { n: "12", name: "E-Commerce Solutions", desc: "Custom online stores and sales platforms optimized for performance, scalability, and customer conversion." },
+  { n: "13", name: "Custom Software", desc: "Tailor-made digital solutions built around unique business requirements, workflows, and operational goals." },
+  { n: "14", name: "Maintenance & Support", desc: "Ongoing technical support, updates, monitoring, and optimization to ensure long-term reliability and performance." },
 ];
 
 export function ServicesSection() {
   return (
     <section
+      id="services"
       className="px-5 sm:px-8 md:px-10 py-20 sm:py-24 md:py-32 rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px]"
       style={{ background: "#FFFFFF", fontFamily: "'Kanit', sans-serif", color: "#0C0C0C" }}
     >

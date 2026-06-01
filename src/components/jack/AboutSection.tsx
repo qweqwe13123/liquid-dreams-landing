@@ -2,6 +2,60 @@ import { FadeIn } from "./FadeIn";
 import { AnimatedText } from "./AnimatedText";
 import { ContactButton } from "./ContactButton";
 
+const OrbSphere = ({ from, to }: { from: string; to: string }) => (
+  <svg viewBox="0 0 200 200" className="w-full h-auto">
+    <defs>
+      <radialGradient id={`g-${from}`} cx="35%" cy="30%" r="75%">
+        <stop offset="0%" stopColor="#ffffff" stopOpacity="0.95" />
+        <stop offset="35%" stopColor={from} stopOpacity="0.85" />
+        <stop offset="100%" stopColor={to} stopOpacity="0.95" />
+      </radialGradient>
+      <radialGradient id={`h-${from}`} cx="35%" cy="25%" r="25%">
+        <stop offset="0%" stopColor="#ffffff" stopOpacity="0.9" />
+        <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
+      </radialGradient>
+    </defs>
+    <circle cx="100" cy="100" r="88" fill={`url(#g-${from})`} />
+    <ellipse cx="78" cy="70" rx="32" ry="22" fill={`url(#h-${from})`} />
+  </svg>
+);
+
+const GlassPrism = () => (
+  <svg viewBox="0 0 200 200" className="w-full h-auto">
+    <defs>
+      <linearGradient id="prism" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#BBCCD7" stopOpacity="0.9" />
+        <stop offset="50%" stopColor="#7689a0" stopOpacity="0.7" />
+        <stop offset="100%" stopColor="#1a2230" stopOpacity="0.9" />
+      </linearGradient>
+    </defs>
+    <polygon points="100,20 175,150 25,150" fill="url(#prism)" stroke="#ffffff" strokeOpacity="0.3" strokeWidth="1" />
+    <polygon points="100,20 175,150 100,110" fill="#ffffff" fillOpacity="0.08" />
+  </svg>
+);
+
+const NetworkNodes = () => (
+  <svg viewBox="0 0 200 200" className="w-full h-auto">
+    <defs>
+      <radialGradient id="node" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stopColor="#ffffff" />
+        <stop offset="100%" stopColor="#4f7fa8" />
+      </radialGradient>
+    </defs>
+    <g stroke="#8aa9c4" strokeOpacity="0.5" strokeWidth="1">
+      <line x1="40" y1="50" x2="150" y2="80" />
+      <line x1="40" y1="50" x2="80" y2="150" />
+      <line x1="150" y1="80" x2="160" y2="160" />
+      <line x1="80" y1="150" x2="160" y2="160" />
+      <line x1="150" y1="80" x2="80" y2="150" />
+    </g>
+    <circle cx="40" cy="50" r="10" fill="url(#node)" />
+    <circle cx="150" cy="80" r="14" fill="url(#node)" />
+    <circle cx="80" cy="150" r="12" fill="url(#node)" />
+    <circle cx="160" cy="160" r="9" fill="url(#node)" />
+  </svg>
+);
+
 export function AboutSection() {
   return (
     <section
@@ -10,30 +64,30 @@ export function AboutSection() {
     >
       <FadeIn delay={0.1} x={-80} y={0} duration={0.9}
         className="absolute top-[4%] left-[1%] sm:left-[2%] md:left-[4%] w-[120px] sm:w-[160px] md:w-[210px]">
-        <img src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/moon_icon.11395d36.png" alt="" className="w-full h-auto" />
+        <OrbSphere from="#5b8def" to="#11224a" />
       </FadeIn>
       <FadeIn delay={0.25} x={-80} y={0} duration={0.9}
         className="absolute bottom-[8%] left-[3%] sm:left-[6%] md:left-[10%] w-[100px] sm:w-[140px] md:w-[180px]">
-        <img src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/p59_1.4659672e.png" alt="" className="w-full h-auto" />
+        <GlassPrism />
       </FadeIn>
       <FadeIn delay={0.15} x={80} y={0} duration={0.9}
         className="absolute top-[4%] right-[1%] sm:right-[2%] md:right-[4%] w-[120px] sm:w-[160px] md:w-[210px]">
-        <img src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/lego_icon-1.703bb594.png" alt="" className="w-full h-auto" />
+        <OrbSphere from="#a8c5e0" to="#2b3a55" />
       </FadeIn>
       <FadeIn delay={0.3} x={80} y={0} duration={0.9}
         className="absolute bottom-[8%] right-[3%] sm:right-[6%] md:right-[10%] w-[130px] sm:w-[170px] md:w-[220px]">
-        <img src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/Group_134-1.2e04f3ce.png" alt="" className="w-full h-auto" />
+        <NetworkNodes />
       </FadeIn>
 
       <div className="flex flex-col items-center gap-10 sm:gap-14 md:gap-16 relative z-10">
         <FadeIn as="h2" delay={0} y={40}
           className="hero-heading font-black uppercase leading-none tracking-tight text-center"
           style={{ fontSize: "clamp(3rem, 12vw, 160px)" }}>
-          About me
+          Who We Are
         </FadeIn>
         <AnimatedText
-          text="With more than five years of experience in design, i focus on branding, web design, and user experience, i truly enjoy working with businesses that aim to stand out and present their best image. Let's build something incredible together!"
-          className="text-[#D7E2EA] font-medium text-center leading-relaxed max-w-[560px]"
+          text="We build digital systems that help businesses scale. From premium websites and mobile applications to automation, customer acquisition, and operational infrastructure, we create solutions designed to increase efficiency, strengthen brands, and drive long-term growth. If you don't see the exact service you're looking for on our Services page, let's talk. We're always open to exploring new opportunities and finding the right solution for your business."
+          className="text-[#D7E2EA] font-medium text-center leading-relaxed max-w-[760px]"
           style={{ fontSize: "clamp(1rem, 2vw, 1.35rem)" }}
         />
       </div>

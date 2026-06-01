@@ -11,7 +11,7 @@ export function ContactButton() {
         outlineOffset: "-3px",
       }}
     >
-      Contact Me
+      Start a Project
     </button>
   );
 }
