@@ -16,8 +16,9 @@ export const Route = createFileRoute("/")({
 function Index() {
   const display = { fontFamily: "'Instrument Serif', serif" } as const;
   return (
-    <div className="relative min-h-screen w-full overflow-hidden bg-background">
-      <video
+    <div className="w-full bg-background">
+      <section className="relative min-h-screen w-full overflow-hidden">
+        <video
         autoPlay
         loop
         muted
@@ -46,7 +47,7 @@ function Index() {
         </button>
       </nav>
 
-      <section className="relative z-10 flex flex-col items-center px-6 pt-32 pb-40 py-[90px] text-center">
+      <div className="relative z-10 flex flex-col items-center px-6 pt-32 pb-40 py-[90px] text-center">
         <h1
           className="animate-fade-rise max-w-7xl text-5xl font-normal leading-[0.95] tracking-[-2.46px] sm:text-7xl md:text-8xl"
           style={display}
@@ -60,6 +61,7 @@ function Index() {
         <button className="liquid-glass animate-fade-rise-delay-2 mt-12 cursor-pointer rounded-full px-14 py-5 text-base text-foreground transition-transform hover:scale-[1.03]">
           Begin Journey
         </button>
+      </div>
       </section>
       <JackPortfolio />
     </div>
