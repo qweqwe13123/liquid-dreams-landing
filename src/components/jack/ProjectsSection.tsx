@@ -7,9 +7,9 @@ import video2 from "@/video/Screen Recording 2026-06-01 at 11.35.32 PM.MOV";
 import video3 from "@/video/copy_8F24B367-2150-405E-BFE2-44EAB65AE0B8.MOV";
 
 const PROJECTS = [
-  { n: "01", category: "Client", name: "Nextlevel Studio", video: video1 },
-  { n: "02", category: "Personal", name: "Aura Brand Identity", video: video2 },
-  { n: "03", category: "Client", name: "Solaris Digital", video: video3 },
+  { n: "01", category: "Client", name: "Nextlevel Studio", video: video1.url },
+  { n: "02", category: "Personal", name: "Aura Brand Identity", video: video2.url },
+  { n: "03", category: "Client", name: "Solaris Digital", video: video3.url },
 ] as const;
 
 export function ProjectsSection() {
