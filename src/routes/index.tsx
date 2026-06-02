@@ -5,9 +5,9 @@ import { JackPortfolio } from "@/components/jack/JackPortfolio";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Velorah — Where dreams rise through the silence" },
+      { title: "Solver — Where dreams rise through the silence" },
       { name: "description", content: "Digital spaces for deep thinkers, bold creators, and quiet rebels." },
-      { property: "og:title", content: "Velorah" },
+      { property: "og:title", content: "Solver" },
       { property: "og:description", content: "Digital spaces for deep thinkers, bold creators, and quiet rebels." },
     ],
   }),
@@ -34,7 +34,7 @@ function Index() {
 
       <nav className="relative z-10 mx-auto flex max-w-7xl flex-row items-center justify-between px-8 py-6">
         <a href="/" className="text-3xl tracking-tight text-foreground" style={display}>
-          Velorah<sup className="text-xs">®</sup>
+          Solver<sup className="text-xs">®</sup>
         </a>
         <div className="hidden items-center gap-8 md:flex">
           <a href="#" className="text-sm text-foreground transition-colors">Home</a>

@@ -2,6 +2,7 @@ import { MarqueeSection } from "./MarqueeSection";
 import { AboutSection } from "./AboutSection";
 import { ServicesSection } from "./ServicesSection";
 import { ProjectsSection } from "./ProjectsSection";
+import { ReviewsSection } from "./ReviewsSection";
 
 export function JackPortfolio() {
   return (
@@ -10,6 +11,7 @@ export function JackPortfolio() {
       <AboutSection />
       <ServicesSection />
       <ProjectsSection />
+      <ReviewsSection />
     </div>
   );
 }
