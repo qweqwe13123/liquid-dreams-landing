@@ -13,46 +13,79 @@ type LegalDocument = {
   sections: readonly LegalSection[];
 };
 
+const BG = "#121212";
+const BORDER = "rgba(255, 255, 255, 0.12)";
+const MUTED = "rgba(255, 255, 255, 0.45)";
+const BODY = "rgba(255, 255, 255, 0.82)";
+
 export function LegalDocumentPage({ document }: { document: LegalDocument }) {
   return (
     <div
-      className="min-h-screen px-5 py-12 sm:px-8 sm:py-16 md:px-10"
-      style={{ background: "#070B26", fontFamily: "'Inter', sans-serif", color: "#D7E2EA" }}
+      className="min-h-screen"
+      style={{ background: BG, fontFamily: "'Inter', sans-serif", color: "#fff" }}
     >
-      <div className="mx-auto max-w-3xl">
+      <header
+        className="mx-auto flex max-w-4xl items-center justify-between px-6 py-6 sm:px-10 sm:py-8"
+        style={{ borderBottom: `1px solid ${BORDER}` }}
+      >
         <Link
           to="/"
-          className="mb-10 inline-block text-sm text-white/50 transition-colors hover:text-white"
+          className="text-xl font-bold lowercase tracking-tight text-white sm:text-2xl"
         >
-          ← Back to home
+          solver.
         </Link>
-
-        <h1
-          className="mb-2 text-3xl font-semibold tracking-tight text-white sm:text-4xl"
-          style={{ fontFamily: "'Instrument Serif', serif" }}
+        <Link
+          to="/"
+          className="text-sm text-white/70 transition-colors hover:text-white"
         >
+          ← Back
+        </Link>
+      </header>
+
+      <main className="mx-auto max-w-3xl px-6 py-10 sm:px-10 sm:py-14">
+        <h1 className="text-3xl font-bold tracking-tight text-white sm:text-[2.25rem] sm:leading-tight">
           {document.title}
         </h1>
-        <p className="mb-10 text-sm text-white/45">Last Updated: {document.updated}</p>
+        <p className="mt-3 text-sm" style={{ color: MUTED }}>
+          Last updated: {document.updated}
+        </p>
 
-        <div className="flex flex-col gap-8">
-          {document.sections.map((section) => (
+        <hr className="my-8 border-0" style={{ borderTop: `1px solid ${BORDER}` }} />
+
+        <p className="mb-2 text-base font-semibold text-white">
+          {document.title} — Solver Company
+        </p>
+        <p className="mb-6 text-sm" style={{ color: MUTED }}>
+          Last updated: {document.updated}
+        </p>
+
+        <hr className="mb-10 border-0" style={{ borderTop: `1px solid ${BORDER}` }} />
+
+        <div className="flex flex-col gap-10">
+          {document.sections.map((section, index) => (
             <section key={section.heading}>
-              <h2 className="mb-3 text-lg font-semibold text-white">{section.heading}</h2>
+              <h2 className="mb-4 text-lg font-bold text-white">{section.heading}</h2>
               {section.paragraphs.map((p) => (
-                <p key={p} className="mb-3 text-[15px] leading-relaxed text-white/72">
+                <p
+                  key={p}
+                  className="mb-4 text-[15px] leading-[1.75]"
+                  style={{ color: BODY }}
+                >
                   {p}
                 </p>
               ))}
               {section.list ? (
-                <ul className="mb-3 list-disc space-y-1.5 pl-5 text-[15px] leading-relaxed text-white/72">
+                <ul
+                  className="mb-4 list-disc space-y-2 pl-5 text-[15px] leading-[1.75]"
+                  style={{ color: BODY }}
+                >
                   {section.list.map((item) => (
                     <li key={item}>{item}</li>
                   ))}
                 </ul>
               ) : null}
               {section.email ? (
-                <p className="text-[15px] text-white/72">
+                <p className="text-[15px] leading-[1.75]" style={{ color: BODY }}>
                   Email:{" "}
                   <a
                     href={`mailto:${section.email}`}
@@ -62,10 +95,16 @@ export function LegalDocumentPage({ document }: { document: LegalDocument }) {
                   </a>
                 </p>
               ) : null}
+              {index < document.sections.length - 1 ? (
+                <hr
+                  className="mt-10 border-0"
+                  style={{ borderTop: `1px solid ${BORDER}` }}
+                />
+              ) : null}
             </section>
           ))}
         </div>
-      </div>
+      </main>
     </div>
   );
 }
