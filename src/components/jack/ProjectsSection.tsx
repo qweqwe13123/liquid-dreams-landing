@@ -2,14 +2,14 @@ import { useEffect, useRef } from "react";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { LiveProjectButton } from "./LiveProjectButton";
 
-import video1 from "@/assets/project1.mp4.asset.json";
-import video2 from "@/assets/project2.mp4.asset.json";
-import video3 from "@/assets/project3.mp4.asset.json";
+import video1 from "@/assets/video/Video Project 1.mp4";
+import video2 from "@/assets/video/copy_8F24B367-2150-405E-BFE2-44EAB65AE0B8.mp4";
+import video3 from "@/assets/video/Video Project 1 copy.mp4";
 
 const PROJECTS = [
-  { n: "01", category: "Client", name: "Nextlevel Studio", video: video1.url },
-  { n: "02", category: "Personal", name: "Aura Brand Identity", video: video2.url },
-  { n: "03", category: "Client", name: "Solaris Digital", video: video3.url },
+  { n: "01", category: "Client", name: "Nextlevel Studio", video: video1 },
+  { n: "02", category: "Personal", name: "Aura Brand Identity", video: video2 },
+  { n: "03", category: "Client", name: "Solaris Digital", video: video3 },
 ] as const;
 
 function ProjectCard({
