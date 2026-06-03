@@ -10,7 +10,8 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import { reportLovableError } from "../lib/lovable-error-reporting";
+import { reportAppError } from "../lib/error-reporting";
+import { siteMetaTags } from "../lib/site-meta";
 import { AppReadyProvider, useAppReady } from "../contexts/app-ready";
 import { SiteLoader } from "../components/SiteLoader";
 
@@ -40,7 +41,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
   const router = useRouter();
   useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
+    reportAppError(error, { boundary: "tanstack_root_error_component" });
   }, [error]);
 
   return (
@@ -79,18 +80,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Solver creates a fullscreen hero section with a looping video background and glassmorphic navigation." },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Solver creates a fullscreen hero section with a looping video background and glassmorphic navigation." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "Lovable App" },
-      { name: "twitter:description", content: "Solver creates a fullscreen hero section with a looping video background and glassmorphic navigation." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/f1d1f609-936f-451b-8b1c-a253e561cde9/id-preview-4347338a--c352ab78-5f09-461d-b9fe-30934752911f.lovable.app-1780342870362.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/f1d1f609-936f-451b-8b1c-a253e561cde9/id-preview-4347338a--c352ab78-5f09-461d-b9fe-30934752911f.lovable.app-1780342870362.png" },
+      ...siteMetaTags(),
     ],
     links: [
       {
