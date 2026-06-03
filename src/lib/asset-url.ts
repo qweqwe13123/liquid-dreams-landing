@@ -1,5 +1,7 @@
-// Remote assets are served from the published app origin when needed (CORS is open).
-const ASSET_ORIGIN = "https://www.solverwebsite.com";
+// Lovable assets are hosted at /__l5e/* on lovable.app infrastructure.
+// On external hosts (Vercel, custom domains) the relative path 404s, so we
+// always resolve against the published lovable.app origin (CORS is open).
+const ASSET_ORIGIN = "https://liquid-dreams-landing.lovable.app";
 
 type AssetPointer = { url: string };
 
