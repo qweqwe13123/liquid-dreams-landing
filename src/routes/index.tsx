@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
+import { HeroSocialProof } from "@/components/hero/HeroSocialProof";
+import { HeroStatsBar } from "@/components/hero/HeroStatsBar";
 import { JackPortfolio } from "@/components/jack/JackPortfolio";
 import { useAppReady } from "@/contexts/app-ready";
 
@@ -84,7 +86,7 @@ function Index() {
           </button>
         </nav>
 
-        <div className="relative z-10 flex flex-col items-center px-6 pb-40 pt-32 py-[90px] text-center">
+        <div className="relative z-10 flex flex-col items-center px-6 pb-44 pt-32 py-[90px] text-center sm:pb-52">
           <h1
             className="animate-fade-rise max-w-7xl text-5xl font-normal leading-[0.95] tracking-[-2.46px] sm:text-7xl md:text-8xl"
             style={display}
@@ -96,9 +98,14 @@ function Index() {
             We're designing tools for deep thinkers, bold creators, and quiet rebels. Amid the chaos, we
             build digital spaces for sharp focus and inspired work.
           </p>
-          <button className="liquid-glass animate-fade-rise-delay-2 mt-12 cursor-pointer rounded-full px-14 py-5 text-base text-foreground transition-transform hover:scale-[1.03]">
+          <HeroSocialProof />
+          <button className="liquid-glass mt-10 cursor-pointer rounded-full px-14 py-5 text-base text-foreground transition-transform hover:scale-[1.03] sm:mt-12">
             Begin Journey
           </button>
+        </div>
+
+        <div className="absolute bottom-6 left-0 right-0 z-10 sm:bottom-8">
+          <HeroStatsBar />
         </div>
       </section>
       <JackPortfolio />

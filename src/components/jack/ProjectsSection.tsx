@@ -97,7 +97,7 @@ export function ProjectsSection() {
         className="hero-heading mb-20 text-center font-black uppercase leading-none tracking-tight sm:mb-28"
         style={{ fontSize: "clamp(3rem, 12vw, 160px)" }}
       >
-        PROJECTS 2-
+        PROJECTS
       </motion.h2>
 
       <div className="flex flex-col gap-24 sm:gap-32 md:gap-40">
