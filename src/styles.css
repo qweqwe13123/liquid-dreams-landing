@@ -203,3 +203,12 @@
   -webkit-text-fill-color: transparent;
   color: transparent;
 }
+
+/* Mobile & tablet only — desktop (lg+) unchanged */
+@media (max-width: 1023px) {
+  html,
+  body {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+}

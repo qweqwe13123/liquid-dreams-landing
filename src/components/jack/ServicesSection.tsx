@@ -29,8 +29,8 @@ export function ServicesSection({ full = false }: { full?: boolean } = {}) {
       style={{ background: "#FFFFFF", fontFamily: "'Kanit', sans-serif", color: "#0C0C0C" }}
     >
       <h2
-        className="font-black uppercase text-center mb-16 sm:mb-20 md:mb-28"
-        style={{ color: "#0C0C0C", fontSize: "clamp(3rem, 12vw, 160px)", lineHeight: 1 }}
+        className="mb-12 text-center text-5xl font-black uppercase leading-none max-lg:sm:text-6xl sm:mb-20 md:mb-28 lg:mb-16 lg:text-[clamp(3rem,12vw,160px)]"
+        style={{ color: "#0C0C0C", lineHeight: 1 }}
       >
         Services
       </h2>
@@ -39,22 +39,28 @@ export function ServicesSection({ full = false }: { full?: boolean } = {}) {
           <FadeIn
             key={s.n}
             delay={i * 0.1}
-            className="flex items-start gap-6 sm:gap-10 py-8 sm:py-10 md:py-12"
+            className="flex max-lg:flex-col max-lg:gap-4 items-start gap-6 py-8 sm:gap-10 sm:py-10 md:py-12"
             style={{
               borderTop: i === 0 ? "1px solid rgba(12,12,12,0.15)" : "none",
               borderBottom: "1px solid rgba(12,12,12,0.15)",
             }}
           >
-            <div className="font-black" style={{ color: "#0C0C0C", fontSize: "clamp(3rem, 10vw, 140px)", lineHeight: 0.9 }}>
+            <div
+              className="font-black leading-[0.9] max-lg:text-5xl lg:text-[clamp(3rem,10vw,140px)]"
+              style={{ color: "#0C0C0C" }}
+            >
               {s.n}
             </div>
-            <div className="flex-1 flex flex-col gap-3">
-              <div className="font-medium uppercase" style={{ fontSize: "clamp(1rem, 2.2vw, 2.1rem)", lineHeight: 1.1 }}>
+            <div className="flex flex-1 flex-col gap-2 max-lg:w-full lg:gap-3">
+              <div
+                className="font-medium uppercase leading-[1.1] max-lg:text-lg lg:text-[clamp(1rem,2.2vw,2.1rem)]"
+                style={{ color: "#0C0C0C" }}
+              >
                 {s.name}
               </div>
               <p
-                className="font-light leading-relaxed max-w-2xl"
-                style={{ fontSize: "clamp(0.85rem, 1.6vw, 1.25rem)", opacity: 0.6 }}
+                className="max-w-2xl font-light leading-relaxed max-lg:text-[15px] lg:text-[clamp(0.85rem,1.6vw,1.25rem)]"
+                style={{ opacity: 0.6 }}
               >
                 {s.desc}
               </p>

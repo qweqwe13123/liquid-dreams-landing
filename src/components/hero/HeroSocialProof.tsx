@@ -23,7 +23,7 @@ const AVATARS = [
 
 export function HeroSocialProof() {
   return (
-    <div className="animate-fade-rise-delay mt-10 flex flex-col items-center gap-4 sm:flex-row sm:gap-5">
+    <div className="animate-fade-rise-delay mt-8 flex w-full max-w-md flex-col items-center gap-4 px-2 max-lg:mt-10 sm:flex-row sm:gap-5 lg:mt-10">
       <div className="flex -space-x-2.5" aria-hidden>
         {AVATARS.map((avatar, i) => (
           <img

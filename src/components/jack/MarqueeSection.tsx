@@ -73,15 +73,14 @@ export function MarqueeSection() {
   return (
     <section
       ref={sectionRef}
-      className="overflow-hidden pt-24 pb-10 sm:pt-32 md:pt-40"
+      className="overflow-hidden pt-16 pb-8 max-lg:overflow-x-hidden sm:pt-32 md:pt-40 lg:pt-24 lg:pb-10"
       style={{ background: "#070B26", fontFamily: "'Kanit', sans-serif" }}
     >
-      <div className="max-w-[1600px] px-6 pb-12 md:px-12 md:pb-16 lg:px-16 lg:pb-20">
+      <div className="max-w-[1600px] px-4 pb-8 sm:px-6 md:px-12 md:pb-16 lg:px-16 lg:pb-20">
         <h2
-          className="max-w-4xl font-normal leading-[1.12] tracking-[-0.02em] text-[#D7DBE8]/95"
+          className="max-w-4xl font-normal leading-[1.2] tracking-[-0.02em] text-[#D7DBE8]/95 max-lg:text-xl max-lg:sm:text-2xl lg:text-[clamp(1.5rem,3.8vw,3.25rem)] lg:leading-[1.12]"
           style={{
             fontFamily: "'Inter', sans-serif",
-            fontSize: "clamp(1.5rem, 3.8vw, 3.25rem)",
             fontWeight: 400,
           }}
         >

@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { Link } from "@tanstack/react-router";
 import { HeroScrollHint } from "@/components/hero/HeroScrollHint";
 import { HeroSocialProof } from "@/components/hero/HeroSocialProof";
 import { HeroStatsBar } from "@/components/hero/HeroStatsBar";
+import { SiteHeader } from "@/components/layout/SiteHeader";
 import { JackPortfolio } from "@/components/jack/JackPortfolio";
 import { useAppReady } from "@/contexts/app-ready";
+import { useAutoplayVideo } from "@/hooks/use-autoplay-video";
+import { useGlobalVideoUnlock } from "@/hooks/use-global-video-unlock";
 import { siteMetaTags } from "@/lib/site-meta";
 
 const HERO_VIDEO =
@@ -22,80 +24,61 @@ function Index() {
   const display = { fontFamily: "'Instrument Serif', serif" } as const;
   const { ready } = useAppReady();
   const [heroVideoSrc, setHeroVideoSrc] = useState<string | null>(null);
+  const heroWrapRef = useRef<HTMLDivElement>(null);
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
+
+  useGlobalVideoUnlock();
+  useAutoplayVideo(heroWrapRef, heroVideoRef, { amount: 0.1 });
 
   useEffect(() => {
     if (!ready) return;
     setHeroVideoSrc(HERO_VIDEO);
-    const t = window.setTimeout(() => {
-      const v = document.querySelector<HTMLVideoElement>("[data-hero-video]");
-      v?.play().catch(() => {});
-    }, 100);
-    return () => window.clearTimeout(t);
   }, [ready]);
 
   return (
-    <div className="w-full bg-background">
+    <div className="w-full overflow-x-clip bg-background">
       <section className="relative min-h-screen w-full overflow-hidden">
         <div className="absolute inset-0 z-0 bg-[#0C0C0C]" aria-hidden />
-        {heroVideoSrc ? (
-          <video
-            data-hero-video
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="auto"
-            src={heroVideoSrc}
-            className="absolute inset-0 z-0 h-full w-full object-cover"
-            onLoadedData={(e) => e.currentTarget.play().catch(() => {})}
-          />
-        ) : null}
+        <div ref={heroWrapRef} className="absolute inset-0 z-0">
+          {heroVideoSrc ? (
+            <video
+              ref={heroVideoRef}
+              data-hero-video
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="auto"
+              src={heroVideoSrc}
+              className="absolute inset-0 z-0 h-full w-full object-cover"
+            />
+          ) : null}
+        </div>
 
-        <nav className="relative z-10 mx-auto flex max-w-7xl flex-row items-center justify-between px-8 py-6">
-          <a href="/" className="text-3xl tracking-tight text-foreground" style={display}>
-            Solver<sup className="text-xs">®</sup>
-          </a>
-          <div className="hidden items-center gap-8 md:flex">
-            <a href="#" className="text-sm text-foreground transition-colors">
-              Home
-            </a>
-            <Link
-              to="/services"
-              className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-            >
-              Services
-            </Link>
-            <a
-              href="#contact"
-              className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-            >
-              Reach Us
-            </a>
-          </div>
-          <button className="liquid-glass rounded-full px-6 py-2.5 text-sm text-foreground transition-transform hover:scale-[1.03]">
-            Begin Journey
-          </button>
-        </nav>
+        <SiteHeader logoStyle={display} variant="light" />
 
-        <div className="relative z-10 flex flex-col items-center px-6 pb-56 pt-32 py-[90px] text-center sm:pb-64">
+        <div className="relative z-10 flex flex-col items-center px-4 py-[90px] pt-32 pb-56 text-center max-lg:px-5 max-lg:py-0 max-lg:pt-20 max-lg:pb-10 sm:px-6">
           <h1
-            className="animate-fade-rise max-w-7xl text-5xl font-normal leading-[0.95] tracking-[-2.46px] sm:text-7xl md:text-8xl"
+            className="animate-fade-rise max-w-7xl font-normal leading-[0.95] tracking-[-2.46px] max-lg:max-w-[20rem] max-lg:text-[2.15rem] max-lg:leading-[1.02] max-lg:tracking-[-1.5px] max-lg:sm:max-w-xl max-lg:sm:text-4xl max-lg:md:text-5xl lg:text-5xl lg:sm:text-7xl lg:md:text-8xl"
             style={display}
           >
             Where <em className="not-italic text-muted-foreground">dreams</em> rise{" "}
             <em className="not-italic text-muted-foreground">through the silence.</em>
           </h1>
-          <p className="animate-fade-rise-delay mt-8 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+          <p className="animate-fade-rise-delay mt-6 max-w-2xl text-[15px] leading-relaxed text-muted-foreground sm:mt-8 sm:text-base lg:mt-8 lg:text-lg">
             We're designing tools for deep thinkers, bold creators, and quiet rebels. Amid the chaos, we
             build digital spaces for sharp focus and inspired work.
           </p>
           <HeroSocialProof />
-          <button className="liquid-glass mt-10 cursor-pointer rounded-full px-14 py-5 text-base text-foreground transition-transform hover:scale-[1.03] sm:mt-12">
+          <button
+            type="button"
+            className="liquid-glass mt-8 cursor-pointer rounded-full px-10 py-4 text-sm text-foreground transition-transform hover:scale-[1.03] max-lg:w-full max-lg:max-w-xs sm:mt-10 sm:px-14 sm:py-5 sm:text-base lg:mt-12 lg:w-auto"
+          >
             Begin Journey
           </button>
         </div>
 
-        <div className="absolute bottom-2 left-0 right-0 z-10 flex flex-col items-center gap-5 sm:bottom-3 md:gap-6">
+        <div className="relative z-10 flex flex-col items-center gap-4 px-4 pb-8 pt-4 max-lg:static max-lg:mt-2 lg:absolute lg:bottom-2 lg:left-0 lg:right-0 lg:gap-5 lg:pb-0 lg:pt-0 lg:sm:bottom-3 lg:md:gap-6">
           <HeroScrollHint />
           <HeroStatsBar />
         </div>

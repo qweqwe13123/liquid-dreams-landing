@@ -68,7 +68,7 @@ function ReviewCard({ review, index }: { review: Review; index: number }) {
   const avatarColor = AVATAR_COLORS[index % AVATAR_COLORS.length];
 
   return (
-    <article className="flex h-full w-[min(100%,340px)] shrink-0 snap-start flex-col rounded-2xl border border-[#E5E5EA] bg-white p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)] sm:w-[360px] sm:p-6">
+    <article className="flex h-full w-[min(88vw,340px)] shrink-0 snap-start flex-col rounded-2xl border border-[#E5E5EA] bg-white p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)] max-lg:w-[min(88vw,320px)] sm:w-[360px] sm:p-6">
       <div className="mb-3 flex items-start justify-between gap-3">
         <StarRating rating={review.rating} size="sm" />
         <span className="text-[11px] text-[#86868B]">{review.date}</span>
@@ -164,7 +164,7 @@ export function ReviewsSection() {
           Ratings &amp; Reviews
         </h2>
 
-        <div className="mb-12 flex flex-col gap-8 rounded-2xl border border-[#E5E5EA] bg-white p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8 md:mb-14">
+        <div className="mb-12 flex flex-col gap-8 rounded-2xl border border-[#E5E5EA] bg-white p-5 max-lg:p-5 sm:flex-row sm:items-center sm:justify-between sm:p-8 md:mb-14">
           <div className="flex items-center gap-6 sm:gap-10">
             <div className="text-center sm:text-left">
               <p
@@ -187,7 +187,7 @@ export function ReviewsSection() {
 
         <div className="mb-5 flex items-center justify-between">
           <p className="text-[15px] font-semibold text-[#1D1D1F]">Most Helpful Reviews</p>
-          <div className="hidden gap-2 sm:flex">
+          <div className="flex gap-2">
             <button
               type="button"
               onClick={() => scroll("left")}

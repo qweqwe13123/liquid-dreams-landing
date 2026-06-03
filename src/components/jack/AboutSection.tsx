@@ -59,36 +59,34 @@ const NetworkNodes = () => (
 export function AboutSection() {
   return (
     <section
-      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-5 py-20 sm:px-8 md:px-10"
+      className="relative flex min-h-0 flex-col items-center justify-center overflow-hidden px-5 py-16 max-lg:px-4 sm:px-8 sm:py-20 lg:min-h-screen lg:px-10 lg:py-20"
       style={{ background: "#070B26", fontFamily: "'Kanit', sans-serif" }}
     >
       <FadeIn delay={0.1} x={-80} y={0} duration={0.9}
-        className="absolute top-[4%] left-[1%] w-[120px] sm:left-[2%] sm:w-[160px] md:left-[4%] md:w-[210px]">
+        className="absolute top-[4%] left-[1%] hidden w-[120px] lg:block sm:left-[2%] sm:w-[160px] md:left-[4%] md:w-[210px]">
         <OrbSphere from="#5b8def" to="#11224a" />
       </FadeIn>
       <FadeIn delay={0.25} x={-80} y={0} duration={0.9}
-        className="absolute bottom-[8%] left-[3%] w-[100px] sm:left-[6%] sm:w-[140px] md:left-[10%] md:w-[180px]">
+        className="absolute bottom-[8%] left-[3%] hidden w-[100px] lg:block sm:left-[6%] sm:w-[140px] md:left-[10%] md:w-[180px]">
         <GlassPrism />
       </FadeIn>
       <FadeIn delay={0.15} x={80} y={0} duration={0.9}
-        className="absolute top-[4%] right-[1%] w-[120px] sm:right-[2%] sm:w-[160px] md:right-[4%] md:w-[210px]">
+        className="absolute top-[4%] right-[1%] hidden w-[120px] lg:block sm:right-[2%] sm:w-[160px] md:right-[4%] md:w-[210px]">
         <OrbSphere from="#a8c5e0" to="#2b3a55" />
       </FadeIn>
       <FadeIn delay={0.3} x={80} y={0} duration={0.9}
-        className="absolute bottom-[8%] right-[3%] w-[130px] sm:right-[6%] sm:w-[170px] md:right-[10%] md:w-[220px]">
+        className="absolute bottom-[8%] right-[3%] hidden w-[130px] lg:block sm:right-[6%] sm:w-[170px] md:right-[10%] md:w-[220px]">
         <NetworkNodes />
       </FadeIn>
 
       <div className="relative z-10 flex flex-col items-center gap-10 sm:gap-14 md:gap-16">
         <FadeIn as="h2" delay={0} y={40}
-          className="hero-heading text-center font-black uppercase leading-none tracking-tight"
-          style={{ fontSize: "clamp(3rem, 12vw, 160px)" }}>
+          className="hero-heading text-center text-5xl font-black uppercase leading-none tracking-tight max-lg:sm:text-6xl lg:text-[clamp(3rem,12vw,160px)]">
           Who We Are
         </FadeIn>
         <AnimatedText
           text="We build digital systems that help businesses scale. From premium websites and mobile applications to automation, customer acquisition, and operational infrastructure, we create solutions designed to increase efficiency, strengthen brands, and drive long-term growth. If you don't see the exact service you're looking for on our Services page, let's talk. We're always open to exploring new opportunities and finding the right solution for your business."
-          className="max-w-[760px] text-center font-medium leading-relaxed text-[#D7E2EA]"
-          style={{ fontSize: "clamp(1rem, 2vw, 1.35rem)" }}
+          className="max-w-[760px] px-1 text-center text-base font-medium leading-relaxed text-[#D7E2EA] max-lg:max-w-[22rem] lg:text-[clamp(1rem,2vw,1.35rem)]"
         />
       </div>
       <div className="relative z-10 mt-16 sm:mt-20 md:mt-24">

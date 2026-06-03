@@ -1,5 +1,6 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { useAutoplayVideo } from "@/hooks/use-autoplay-video";
 import { LiveProjectButton } from "./LiveProjectButton";
 import { assetUrl } from "@/lib/asset-url";
 
@@ -17,18 +18,7 @@ function ProjectCard({ project }: { project: (typeof PROJECTS)[number] }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const isInView = useInView(containerRef, { amount: 0.25, margin: "-5% 0px" });
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    if (isInView) {
-      const play = () => video.play().catch(() => {});
-      if (video.readyState >= 2) play();
-      else video.addEventListener("canplay", play, { once: true });
-    } else {
-      video.pause();
-    }
-  }, [isInView]);
+  useAutoplayVideo(containerRef, videoRef, { amount: 0.2 });
 
   return (
     <motion.article
@@ -48,8 +38,9 @@ function ProjectCard({ project }: { project: (typeof PROJECTS)[number] }) {
             src={project.video}
             muted
             loop
+            autoPlay
             playsInline
-            preload="metadata"
+            preload="auto"
             className="absolute inset-0 h-full w-full object-cover"
           />
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
@@ -86,7 +77,7 @@ function ProjectCard({ project }: { project: (typeof PROJECTS)[number] }) {
 export function ProjectsSection() {
   return (
     <section
-      className="relative z-10 -mt-10 rounded-t-[40px] px-5 py-24 sm:-mt-12 sm:rounded-t-[50px] sm:px-8 sm:py-32 md:-mt-14 md:rounded-t-[60px] md:px-10"
+      className="relative z-10 -mt-10 rounded-t-[40px] px-4 py-16 max-lg:overflow-x-hidden sm:-mt-12 sm:rounded-t-[50px] sm:px-8 sm:py-32 md:-mt-14 md:rounded-t-[60px] md:px-10 lg:py-24"
       style={{ background: "#070B26", fontFamily: "'Kanit', sans-serif" }}
     >
       <motion.h2
@@ -94,8 +85,7 @@ export function ProjectsSection() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.4 }}
         transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-        className="hero-heading mb-20 text-center font-black uppercase leading-none tracking-tight sm:mb-28"
-        style={{ fontSize: "clamp(3rem, 12vw, 160px)" }}
+        className="hero-heading mb-12 text-center font-black uppercase leading-none tracking-tight max-lg:text-5xl max-lg:sm:text-6xl sm:mb-28 lg:mb-20 lg:text-[clamp(3rem,12vw,160px)]"
       >
         PROJECTS
       </motion.h2>

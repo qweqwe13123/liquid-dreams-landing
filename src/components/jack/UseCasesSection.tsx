@@ -23,7 +23,7 @@ const USE_CASES: UseCase[] = [
   },
 ];
 
-const STAGGER_PT = ["pt-0", "pt-5 md:pt-6", "pt-10 md:pt-12", "pt-[3.25rem] md:pt-16"] as const;
+const STAGGER_PT_DESKTOP = ["pt-0", "pt-5 md:pt-6", "pt-10 md:pt-12", "pt-[3.25rem] md:pt-16"] as const;
 
 function StaggeredRow({ className = "" }: { className?: string }) {
   return (
@@ -31,7 +31,10 @@ function StaggeredRow({ className = "" }: { className?: string }) {
       className={`mx-auto flex w-max max-w-full flex-row items-start justify-center gap-5 px-2 sm:gap-6 md:gap-7 lg:gap-8 ${className}`}
     >
       {USE_CASES.map((useCase, i) => (
-        <div key={useCase.title} className={`w-[min(100%,300px)] shrink-0 sm:w-[320px] ${STAGGER_PT[i]}`}>
+        <div
+          key={useCase.title}
+          className={`w-[min(100%,300px)] shrink-0 sm:w-[320px] ${STAGGER_PT_DESKTOP[i]}`}
+        >
           <UseCaseCard useCase={useCase} delay={0.06 + i * 0.08} />
         </div>
       ))}
@@ -42,17 +45,17 @@ function StaggeredRow({ className = "" }: { className?: string }) {
 export function UseCasesSection() {
   return (
     <section
-      className="relative overflow-x-auto px-4 py-12 sm:px-6 sm:py-14 md:px-8 md:py-16"
+      className="relative overflow-hidden px-4 py-12 max-lg:overflow-x-hidden sm:px-6 sm:py-14 md:px-8 md:py-16"
       style={{ background: "#070B26", fontFamily: "'Kanit', sans-serif" }}
       aria-label="Use cases"
     >
-      <div className="mx-auto flex max-w-[340px] flex-col gap-8 sm:max-w-[360px] md:hidden">
+      <div className="mx-auto flex max-w-[min(100%,360px)] flex-col gap-8 lg:hidden">
         {USE_CASES.map((useCase, i) => (
           <UseCaseCard key={useCase.title} useCase={useCase} delay={0.06 + i * 0.08} />
         ))}
       </div>
 
-      <StaggeredRow className="hidden md:flex" />
+      <StaggeredRow className="hidden lg:flex" />
     </section>
   );
 }

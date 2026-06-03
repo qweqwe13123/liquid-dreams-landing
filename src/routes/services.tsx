@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { SiteHeader } from "@/components/layout/SiteHeader";
 import { ServicesSection } from "@/components/jack/ServicesSection";
 import { FooterSection } from "@/components/jack/FooterSection";
+import { useGlobalVideoUnlock } from "@/hooks/use-global-video-unlock";
 
 export const Route = createFileRoute("/services")({
   head: () => ({
@@ -15,14 +17,21 @@ export const Route = createFileRoute("/services")({
 });
 
 function ServicesPage() {
+  const display = { fontFamily: "'Instrument Serif', serif" } as const;
+  useGlobalVideoUnlock();
+
   return (
-    <div style={{ background: "#0C0C0C", fontFamily: "'Kanit', sans-serif", minHeight: "100vh" }}>
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-8 py-6">
-        <Link to="/" className="text-3xl tracking-tight text-white" style={{ fontFamily: "'Instrument Serif', serif" }}>
-          Solver<sup className="text-xs">®</sup>
-        </Link>
-        <Link to="/" className="text-sm text-white/70 hover:text-white transition-colors">← Back home</Link>
-      </nav>
+    <div className="min-h-screen overflow-x-clip" style={{ background: "#0C0C0C", fontFamily: "'Kanit', sans-serif" }}>
+      <SiteHeader
+        logoStyle={display}
+        variant="dark"
+        showDesktopCta={false}
+        backLink={
+          <Link to="/" className="text-sm text-white/70 transition-colors hover:text-white">
+            ← Back home
+          </Link>
+        }
+      />
       <ServicesSection full />
       <FooterSection />
     </div>

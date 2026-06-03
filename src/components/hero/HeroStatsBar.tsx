@@ -7,7 +7,7 @@ const STATS = [
 
 export function HeroStatsBar() {
   return (
-    <div className="animate-fade-rise-delay-2 mx-auto w-full max-w-3xl px-4">
+    <div className="animate-fade-rise-delay-2 mx-auto w-full max-w-3xl px-3 max-lg:max-w-[min(100%,20rem)] lg:px-4">
       <div
         className="grid grid-cols-2 divide-x divide-y divide-white/10 overflow-hidden rounded-2xl border border-white/10 sm:grid-cols-4 sm:divide-y-0"
         style={{

@@ -25,7 +25,7 @@ export function LegalDocumentPage({ document }: { document: LegalDocument }) {
       style={{ background: BG, fontFamily: "'Inter', sans-serif", color: "#fff" }}
     >
       <header
-        className="mx-auto flex max-w-4xl items-center justify-between px-6 py-6 sm:px-10 sm:py-8"
+        className="mx-auto flex max-w-4xl items-center justify-between px-4 py-5 max-lg:px-5 sm:px-10 sm:py-8"
         style={{ borderBottom: `1px solid ${BORDER}` }}
       >
         <Link

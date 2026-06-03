@@ -17,7 +17,7 @@ export function FooterSection() {
       style={{ background: "#141414", fontFamily: "'Kanit', sans-serif" }}
     >
       <div className="mx-auto max-w-[1400px]">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(140px,1fr)_repeat(2,minmax(0,1fr))_minmax(200px,1.2fr)] lg:gap-8 xl:gap-10">
+        <div className="grid grid-cols-1 gap-10 max-lg:gap-8 sm:grid-cols-2 lg:grid-cols-[minmax(140px,1fr)_repeat(2,minmax(0,1fr))_minmax(200px,1.2fr)] lg:gap-8 xl:gap-10">
           <div className="lg:pt-1">
             <a
               href="/"
@@ -53,7 +53,7 @@ export function FooterSection() {
             </a>
           </FooterColumn>
 
-          <div className="flex flex-col items-start gap-6 lg:items-end lg:text-right">
+          <div className="flex flex-col items-start gap-6 max-lg:col-span-2 sm:col-span-2 lg:col-span-1 lg:items-end lg:text-right">
             <h3 className="max-w-[220px] text-[13px] font-semibold uppercase leading-[1.35] tracking-[0.08em] text-white/90 lg:ml-auto">
               Let&apos;s Build
               <br />
