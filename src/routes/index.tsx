@@ -28,12 +28,24 @@ function Index() {
   const heroVideoRef = useRef<HTMLVideoElement>(null);
 
   useGlobalVideoUnlock();
-  useAutoplayVideo(heroWrapRef, heroVideoRef, { amount: 0.1 });
+  const { tryPlay } = useAutoplayVideo(heroWrapRef, heroVideoRef, {
+    amount: 0.1,
+    playImmediatelyOnMobile: true,
+  });
 
   useEffect(() => {
     if (!ready) return;
     setHeroVideoSrc(HERO_VIDEO);
   }, [ready]);
+
+  useEffect(() => {
+    if (!heroVideoSrc || typeof window === "undefined" || window.innerWidth >= 1024) return;
+
+    const play = () => tryPlay();
+    play();
+    const timers = [50, 200, 500, 1200, 2500].map((ms) => window.setTimeout(play, ms));
+    return () => timers.forEach((id) => window.clearTimeout(id));
+  }, [heroVideoSrc, tryPlay]);
 
   return (
     <div className="w-full overflow-x-clip bg-background">
@@ -50,6 +62,12 @@ function Index() {
               playsInline
               preload="auto"
               src={heroVideoSrc}
+              onLoadedData={() => {
+                if (typeof window !== "undefined" && window.innerWidth < 1024) tryPlay();
+              }}
+              onCanPlay={() => {
+                if (typeof window !== "undefined" && window.innerWidth < 1024) tryPlay();
+              }}
               className="absolute inset-0 z-0 h-full w-full object-cover"
             />
           ) : null}
