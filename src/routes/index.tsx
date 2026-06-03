@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
+import { HeroScrollHint } from "@/components/hero/HeroScrollHint";
 import { HeroSocialProof } from "@/components/hero/HeroSocialProof";
 import { HeroStatsBar } from "@/components/hero/HeroStatsBar";
 import { JackPortfolio } from "@/components/jack/JackPortfolio";
@@ -86,7 +87,7 @@ function Index() {
           </button>
         </nav>
 
-        <div className="relative z-10 flex flex-col items-center px-6 pb-44 pt-32 py-[90px] text-center sm:pb-52">
+        <div className="relative z-10 flex flex-col items-center px-6 pb-56 pt-32 py-[90px] text-center sm:pb-64">
           <h1
             className="animate-fade-rise max-w-7xl text-5xl font-normal leading-[0.95] tracking-[-2.46px] sm:text-7xl md:text-8xl"
             style={display}
@@ -104,7 +105,8 @@ function Index() {
           </button>
         </div>
 
-        <div className="absolute bottom-6 left-0 right-0 z-10 sm:bottom-8">
+        <div className="absolute bottom-2 left-0 right-0 z-10 flex flex-col items-center gap-5 sm:bottom-3 md:gap-6">
+          <HeroScrollHint />
           <HeroStatsBar />
         </div>
       </section>

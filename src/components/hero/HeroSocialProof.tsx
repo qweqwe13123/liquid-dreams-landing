@@ -1,20 +1,41 @@
-const AVATAR_COLORS = [
-  "linear-gradient(135deg, #6b8cce 0%, #3d5a80 100%)",
-  "linear-gradient(135deg, #c4a574 0%, #8b6914 100%)",
-  "linear-gradient(135deg, #9b7bb8 0%, #5c4a72 100%)",
-  "linear-gradient(135deg, #7eb89a 0%, #3d6b52 100%)",
-  "linear-gradient(135deg, #d4846a 0%, #8b4535 100%)",
-];
+const AVATARS = [
+  {
+    src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=96&h=96&fit=crop&crop=faces",
+    alt: "Community member",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=96&h=96&fit=crop&crop=faces",
+    alt: "Community member",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=96&h=96&fit=crop&crop=faces",
+    alt: "Community member",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=96&h=96&fit=crop&crop=faces",
+    alt: "Community member",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=96&h=96&fit=crop&crop=faces",
+    alt: "Community member",
+  },
+] as const;
 
 export function HeroSocialProof() {
   return (
     <div className="animate-fade-rise-delay mt-10 flex flex-col items-center gap-4 sm:flex-row sm:gap-5">
       <div className="flex -space-x-2.5" aria-hidden>
-        {AVATAR_COLORS.map((bg, i) => (
-          <div
-            key={i}
-            className="h-9 w-9 shrink-0 rounded-full border-2 border-[#0a0f1f] sm:h-10 sm:w-10"
-            style={{ background: bg, zIndex: 5 - i }}
+        {AVATARS.map((avatar, i) => (
+          <img
+            key={avatar.src}
+            src={avatar.src}
+            alt={avatar.alt}
+            width={40}
+            height={40}
+            loading="lazy"
+            decoding="async"
+            className="h-9 w-9 shrink-0 rounded-full border-2 border-[#0a0f1f] object-cover sm:h-10 sm:w-10"
+            style={{ zIndex: 5 - i }}
           />
         ))}
       </div>
