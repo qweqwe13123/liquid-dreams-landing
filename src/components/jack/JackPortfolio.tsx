@@ -7,7 +7,7 @@ import { FooterSection } from "./FooterSection";
 
 export function JackPortfolio() {
   return (
-    <div style={{ background: "#0C0C0C", fontFamily: "'Kanit', sans-serif", overflowX: "clip" }}>
+    <div style={{ background: "#070B26", fontFamily: "'Kanit', sans-serif", overflowX: "clip" }}>
       <MarqueeSection />
       <AboutSection />
       <ServicesSection />
