@@ -1,6 +1,10 @@
+import { useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import { JackPortfolio } from "@/components/jack/JackPortfolio";
+
+const HERO_VIDEO =
+  "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -16,21 +20,33 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   const display = { fontFamily: "'Instrument Serif', serif" } as const;
+  const [heroVideoSrc, setHeroVideoSrc] = useState<string | null>(null);
+
+  useEffect(() => {
+    const load = () => setHeroVideoSrc(HERO_VIDEO);
+    if ("requestIdleCallback" in window) {
+      const id = requestIdleCallback(load, { timeout: 1500 });
+      return () => cancelIdleCallback(id);
+    }
+    const t = window.setTimeout(load, 400);
+    return () => window.clearTimeout(t);
+  }, []);
+
   return (
     <div className="w-full bg-background">
       <section className="relative min-h-screen w-full overflow-hidden">
-        <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 z-0 h-full w-full object-cover"
-      >
-        <source
-          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4"
-          type="video/mp4"
-        />
-      </video>
+        <div className="absolute inset-0 z-0 bg-[#0C0C0C]" aria-hidden />
+        {heroVideoSrc ? (
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="none"
+            src={heroVideoSrc}
+            className="absolute inset-0 z-0 h-full w-full object-cover"
+          />
+        ) : null}
 
       <nav className="relative z-10 mx-auto flex max-w-7xl flex-row items-center justify-between px-8 py-6">
         <a href="/" className="text-3xl tracking-tight text-foreground" style={display}>
