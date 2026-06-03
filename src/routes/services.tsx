@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ServicesSection } from "@/components/jack/ServicesSection";
+import { FooterSection } from "@/components/jack/FooterSection";
 
 export const Route = createFileRoute("/services")({
   head: () => ({
@@ -23,6 +24,7 @@ function ServicesPage() {
         <Link to="/" className="text-sm text-white/70 hover:text-white transition-colors">← Back home</Link>
       </nav>
       <ServicesSection full />
+      <FooterSection />
     </div>
   );
 }
