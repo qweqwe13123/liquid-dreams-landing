@@ -35,14 +35,21 @@ export function FooterSection() {
           </FooterColumn>
 
           <FooterColumn title="Legal">
-            <a href="#" className="transition hover:text-white">
+            <a
+              href="/privacy-policy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition hover:text-white"
+            >
               Privacy Policy
             </a>
-            <a href="#" className="transition hover:text-white">
-              Legal Notice
-            </a>
-            <a href="#" className="transition hover:text-white">
-              Terms of Service
+            <a
+              href="/terms-of-use"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition hover:text-white"
+            >
+              Terms of Use
             </a>
           </FooterColumn>
 

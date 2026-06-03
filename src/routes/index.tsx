@@ -65,16 +65,10 @@ function Index() {
             >
               Services
             </Link>
-            <a href="#" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-              Studio
-            </a>
-            <a href="#" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-              About
-            </a>
-            <a href="#" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-              Journal
-            </a>
-            <a href="#" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+            <a
+              href="#contact"
+              className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+            >
               Reach Us
             </a>
           </div>

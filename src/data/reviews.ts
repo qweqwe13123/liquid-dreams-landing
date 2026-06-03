@@ -11,15 +11,26 @@ export type Review = {
 
 export const REVIEWS: Review[] = [
   {
+    id: "bh",
+    rating: 5,
+    body: "We manage a chain of small hotels and were in serious need of an overhaul of our internal processes. In California, client background checks and collecting application fees prior to confirming a booking are very important to us. Solver developed custom software for us that combined client data verification, a payment system, and the booking process into one convenient platform. The entire process now runs much faster and more professionally. It has become easier for guests to book rooms, and our team has gained more accurate data and better control over operations. We have also noticed growth in direct bookings and a reduction in manual work. Honestly, we didn't expect to be this impressed with the result. Fantastic work and a very professional approach at every stage of the project.",
+    authorInitials: "B.H.",
+    location: "Los Angeles, California",
+    services: ["Custom Software", "Payment Systems", "CRM & Workflow Integration", "Maintenance & Support"],
+    date: "August 14, 2025",
+    response:
+      "B.H., we are very glad to hear that our custom solution has brought such great benefits to your hotel chain. Creating efficient booking and client management systems is what we do best. We are proud to have helped you enhance the guest experience and optimize your operations. Thank you for your trust and for choosing Solver!",
+  },
+  {
     id: "dl",
     rating: 5,
-    body: "Solver completely transformed our approach to work. Our old website was outdated and client record management was chaotic. The team developed a stunning new website and mobile app that clients now use to book appointments. Most importantly, they integrated a CRM system and automated many routine tasks, allowing our administrators to focus on patients rather than paperwork. The number of new inquiries increased by 30%, and we're receiving far more positive online reviews. True professionals!",
+    body: "First of all, I would like to thank Bryan for his professionalism, patience, and courtesy. He carefully listened to all of our requirements, answered every question we had, and made the entire process smooth and stress-free. It was truly a pleasure working with him. I would also like to thank the entire Solver team for their fast and efficient work. Our old website was outdated, and managing client information had become increasingly difficult. The team developed a modern website and mobile application that now allows our clients to book appointments with ease. In addition, they implemented an automated review collection system and streamlined many routine processes, allowing our administrators to focus more on clients instead of administrative tasks. Since implementing these solutions, the number of new inquiries has increased by more than 50%, and the amount of positive online reviews has grown significantly. True professionals. Thank you to Bryan and the entire Solver team for your outstanding work!",
     authorInitials: "D.L.",
     location: "Los Angeles, California",
     services: ["Web & Mobile Development", "CRM & Workflow Integration", "Business Automation", "Reputation Management"],
     date: "February 12, 2026",
     response:
-      "D.L., we are thrilled to hear that our collaboration has brought such significant results for your clinic. Your commitment to improving patient care inspired us to create solutions that truly make a difference. We are proud to have helped you streamline operations and enhance client engagement. Thank you for your trust and for choosing Solver!",
+      "D.L., thank you for your thoughtful review and for recognizing Bryan and our team. We are thrilled that your new website, mobile app, and automation tools have driven such strong growth in inquiries and reviews. It was a pleasure supporting your practice. Thank you for choosing Solver!",
   },
   {
     id: "mk",
@@ -90,13 +101,13 @@ export const REVIEWS: Review[] = [
   {
     id: "op",
     rating: 4,
-    body: "Solver helped us with content automation for our blog and social media. It used to take up an enormous amount of time. Now we have a system that generates ideas and drafts, which has significantly reduced our labor costs. They also improved our website, making it more user-friendly. Very satisfied.",
+    body: "First of all, I would like to thank Olivia for being incredibly professional, responsive, and helpful throughout the entire process. I'd also like to thank the entire Solver team. They helped us automate content creation for our blog and social media, which used to take up a significant amount of time. We now have a system that generates ideas and draft content, helping us reduce workload and improve efficiency. The team also improved our website, making it more user-friendly and professional. We are very satisfied with the results and would gladly recommend Solver to other businesses.",
     authorInitials: "O.P.",
     location: "London, United Kingdom",
     services: ["Content Automation", "Web & Mobile Development", "Digital Operations"],
     date: "September 29, 2025",
     response:
-      "O.P., we greatly appreciate your review! We are glad that our content automation solutions and website improvements helped you save time and increase efficiency. Your satisfaction is our top priority. Thank you for your partnership!",
+      "O.P., thank you for your kind words about Olivia and our team. We are glad our content automation and website improvements helped you save time and present your brand more professionally. We appreciate your recommendation and partnership!",
   },
   {
     id: "iv",
@@ -108,17 +119,6 @@ export const REVIEWS: Review[] = [
     date: "September 6, 2025",
     response:
       "I.V., thank you for your review! We are glad we were able to help your local services business refresh its image and attract more clients. Your satisfaction is our primary goal. We value your trust and wish you continued prosperity!",
-  },
-  {
-    id: "bh",
-    rating: 5,
-    body: "We manage a chain of small hotels and were in serious need of an overhaul of our internal processes. In California, client background checks and collecting application fees prior to confirming a booking are very important to us. Solver developed custom software for us that combined client data verification, a payment system, and the booking process into one convenient platform. The entire process now runs much faster and more professionally. It has become easier for guests to book rooms, and our team has gained more accurate data and better control over operations. We have also noticed growth in direct bookings and a reduction in manual work. Honestly, we didn't expect to be this impressed with the result. Fantastic work and a very professional approach at every stage of the project.",
-    authorInitials: "B.H.",
-    location: "Los Angeles, California",
-    services: ["Custom Software", "Payment Systems", "CRM & Workflow Integration", "Maintenance & Support"],
-    date: "August 14, 2025",
-    response:
-      "B.H., we are very glad to hear that our custom solution has brought such great benefits to your hotel chain. Creating efficient booking and client management systems is what we do best. We are proud to have helped you enhance the guest experience and optimize your operations. Thank you for your trust and for choosing Solver!",
   },
 ];
 
