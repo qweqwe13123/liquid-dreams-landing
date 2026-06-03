@@ -1,6 +1,4 @@
 import { useEffect, useRef } from "react";
-import { useAppReady } from "@/contexts/app-ready";
-import { useLazyInView } from "@/hooks/use-lazy-in-view";
 import { LazyPreviewVideo } from "./LazyPreviewVideo";
 
 import heroSpaceVoyage from "@/assets/gif/hero-space-voyage-preview-eECLH3Yc.mp4";
@@ -42,18 +40,12 @@ function Row({ items }: { items: string[] }) {
 }
 
 export function MarqueeSection() {
-  const { ready } = useAppReady();
+  const sectionRef = useRef<HTMLElement>(null);
   const row1Ref = useRef<HTMLDivElement>(null);
   const row2Ref = useRef<HTMLDivElement>(null);
   const rafRef = useRef(0);
-  const { ref: sectionRef, inView: sectionInView } = useLazyInView<HTMLElement>({
-    rootMargin: "200px 0px",
-    threshold: 0,
-  });
 
   useEffect(() => {
-    if (!ready || !sectionInView) return;
-
     const onScroll = () => {
       if (rafRef.current) return;
       rafRef.current = requestAnimationFrame(() => {
@@ -74,22 +66,12 @@ export function MarqueeSection() {
       window.removeEventListener("scroll", onScroll);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
-  }, [ready, sectionInView, sectionRef]);
-
-  if (!ready) {
-    return (
-      <section
-        className="pt-24 sm:pt-32 md:pt-40 pb-10"
-        style={{ background: "#0C0C0C", minHeight: 320 }}
-        aria-hidden
-      />
-    );
-  }
+  }, []);
 
   return (
     <section
       ref={sectionRef}
-      className="pt-24 sm:pt-32 md:pt-40 pb-10 overflow-hidden"
+      className="overflow-hidden pt-24 pb-10 sm:pt-32 md:pt-40"
       style={{ background: "#0C0C0C", fontFamily: "'Kanit', sans-serif" }}
     >
       <div className="flex flex-col gap-3">

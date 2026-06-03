@@ -27,6 +27,11 @@ function Index() {
   useEffect(() => {
     if (!ready) return;
     setHeroVideoSrc(HERO_VIDEO);
+    const t = window.setTimeout(() => {
+      const v = document.querySelector<HTMLVideoElement>("[data-hero-video]");
+      v?.play().catch(() => {});
+    }, 100);
+    return () => window.clearTimeout(t);
   }, [ready]);
 
   return (
@@ -35,13 +40,15 @@ function Index() {
         <div className="absolute inset-0 z-0 bg-[#0C0C0C]" aria-hidden />
         {heroVideoSrc ? (
           <video
+            data-hero-video
             autoPlay
             loop
             muted
             playsInline
-            preload="metadata"
+            preload="auto"
             src={heroVideoSrc}
             className="absolute inset-0 z-0 h-full w-full object-cover"
+            onLoadedData={(e) => e.currentTarget.play().catch(() => {})}
           />
         ) : null}
 
