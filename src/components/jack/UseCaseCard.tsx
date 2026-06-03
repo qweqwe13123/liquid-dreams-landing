@@ -18,7 +18,7 @@ export function UseCaseCard({
   return (
     <FadeIn delay={delay} y={32} duration={0.75} className={className}>
       <article
-        className="group flex w-full max-w-[340px] flex-col gap-5 rounded-3xl border border-white/[0.08] p-6 sm:max-w-[380px] sm:p-7 md:max-w-[400px] md:p-8"
+        className="group flex w-full max-w-[340px] flex-col gap-5 rounded-3xl border border-white/[0.08] p-6 transition-all duration-300 ease-out hover:-translate-y-1.5 hover:border-white/[0.16] hover:shadow-[0_32px_80px_-24px_rgba(0,0,0,0.75)] sm:max-w-[380px] sm:p-7 md:max-w-[400px] md:p-8"
         style={{
           background:
             "linear-gradient(145deg, rgba(22, 28, 58, 0.92) 0%, rgba(12, 16, 38, 0.88) 100%)",
