@@ -1,31 +1,31 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+
+import heroSpaceVoyage from "@/assets/gif/hero-space-voyage-preview-eECLH3Yc.gif";
+import heroCodenest from "@/assets/gif/hero-codenest-preview-Cgppc2qV.gif";
+import heroVexVentures from "@/assets/gif/hero-vex-ventures-preview-BczMFIiw.gif";
+import heroStellarAiV2 from "@/assets/gif/hero-stellar-ai-v2-preview-DjvxjG3C.gif";
+import heroStellarAi from "@/assets/gif/hero-stellar-ai-preview-D3HL6bw1.gif";
+import heroXportfolio from "@/assets/gif/hero-xportfolio-preview-D4A8maiC.gif";
+import heroOrbitWeb3 from "@/assets/gif/hero-orbit-web3-preview-BXt4OttD.gif";
+import heroNexora from "@/assets/gif/hero-nexora-preview-cx5HmUgo.gif";
+import heroEvrVentures from "@/assets/gif/hero-evr-ventures-preview-DZxeVFEX.gif";
+import heroPortal from "@/assets/gif/hero-portal-preview-DEscBr2T.gif";
 
 const IMAGES = [
-  "https://motionsites.ai/assets/hero-space-voyage-preview-eECLH3Yc.gif",
-  "https://motionsites.ai/assets/hero-codenest-preview-Cgppc2qV.gif",
-  "https://motionsites.ai/assets/hero-vex-ventures-preview-BczMFIiw.gif",
-  "https://motionsites.ai/assets/hero-stellar-ai-v2-preview-DjvxjG3C.gif",
-  "https://motionsites.ai/assets/hero-asme-preview-B_nGDnTP.gif",
-  "https://motionsites.ai/assets/hero-transform-data-preview-Cx5OU29N.gif",
-  "https://motionsites.ai/assets/hero-vitara-preview-Cjz2QYyU.gif",
-  "https://motionsites.ai/assets/hero-terra-preview-BFjrCr7T.gif",
-  "https://motionsites.ai/assets/hero-skyelite-preview-DHaZIgUv.gif",
-  "https://motionsites.ai/assets/hero-aethera-preview-DknSlcTa.gif",
-  "https://motionsites.ai/assets/hero-designpro-preview-D8c5_een.gif",
-  "https://motionsites.ai/assets/hero-stellar-ai-preview-D3HL6bw1.gif",
-  "https://motionsites.ai/assets/hero-xportfolio-preview-D4A8maiC.gif",
-  "https://motionsites.ai/assets/hero-orbit-web3-preview-BXt4OttD.gif",
-  "https://motionsites.ai/assets/hero-nexora-preview-cx5HmUgo.gif",
-  "https://motionsites.ai/assets/hero-evr-ventures-preview-DZxeVFEX.gif",
-  "https://motionsites.ai/assets/hero-planet-orbit-preview-DWAP8Z1P.gif",
-  "https://motionsites.ai/assets/hero-new-era-preview-CocuDUm9.gif",
-  "https://motionsites.ai/assets/hero-wealth-preview-B70idl_u.gif",
-  "https://motionsites.ai/assets/hero-luminex-preview-CxOP7ce6.gif",
-  "https://motionsites.ai/assets/hero-celestia-preview-0yO3jXO8.gif",
+  heroSpaceVoyage,
+  heroCodenest,
+  heroVexVentures,
+  heroStellarAiV2,
+  heroStellarAi,
+  heroXportfolio,
+  heroOrbitWeb3,
+  heroNexora,
+  heroEvrVentures,
+  heroPortal,
 ];
 
-const ROW1 = IMAGES.slice(0, 11);
-const ROW2 = IMAGES.slice(11);
+const ROW1 = IMAGES.slice(0, 5);
+const ROW2 = IMAGES.slice(5);
 
 function Row({ items, direction }: { items: string[]; direction: 1 | -1 }) {
   const tripled = [...items, ...items, ...items];
@@ -43,7 +43,6 @@ function Row({ items, direction }: { items: string[]; direction: 1 | -1 }) {
       ))}
     </div>
   );
-  // direction unused; handled by parent transform sign
   void direction;
 }
 
