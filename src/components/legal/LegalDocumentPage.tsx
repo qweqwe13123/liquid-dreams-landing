@@ -1,5 +1,3 @@
-import { Link } from "@tanstack/react-router";
-
 type LegalSection = {
   heading: string;
   paragraphs: readonly string[];
@@ -20,29 +18,10 @@ const BODY = "rgba(255, 255, 255, 0.82)";
 
 export function LegalDocumentPage({ document }: { document: LegalDocument }) {
   return (
-    <div
-      className="min-h-screen"
-      style={{ background: BG, fontFamily: "'Inter', sans-serif", color: "#fff" }}
+    <main
+      className="mx-auto max-w-3xl px-6 py-10 sm:px-10 sm:py-14"
+      style={{ fontFamily: "'Inter', sans-serif", color: "#fff" }}
     >
-      <header
-        className="mx-auto flex max-w-4xl items-center justify-between px-4 py-5 max-lg:px-5 sm:px-10 sm:py-8"
-        style={{ borderBottom: `1px solid ${BORDER}` }}
-      >
-        <Link
-          to="/"
-          className="text-xl font-bold lowercase tracking-tight text-white sm:text-2xl"
-        >
-          solver.
-        </Link>
-        <Link
-          to="/"
-          className="text-sm text-white/70 transition-colors hover:text-white"
-        >
-          ← Back
-        </Link>
-      </header>
-
-      <main className="mx-auto max-w-3xl px-6 py-10 sm:px-10 sm:py-14">
         <h1 className="text-3xl font-bold tracking-tight text-white sm:text-[2.25rem] sm:leading-tight">
           {document.title}
         </h1>
@@ -104,7 +83,6 @@ export function LegalDocumentPage({ document }: { document: LegalDocument }) {
             </section>
           ))}
         </div>
-      </main>
-    </div>
+    </main>
   );
 }

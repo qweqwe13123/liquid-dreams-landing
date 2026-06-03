@@ -1,4 +1,7 @@
 import type { ReactNode } from "react";
+import { Link } from "@tanstack/react-router";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
+import { CONTACT_EMAIL, WHATSAPP_URL } from "@/lib/contact";
 
 function FooterColumn({ title, children }: { title: string; children: ReactNode }) {
   return (
@@ -19,38 +22,40 @@ export function FooterSection() {
       <div className="mx-auto max-w-[1400px]">
         <div className="grid grid-cols-1 gap-10 max-lg:gap-8 sm:grid-cols-2 lg:grid-cols-[minmax(140px,1fr)_repeat(2,minmax(0,1fr))_minmax(200px,1.2fr)] lg:gap-8 xl:gap-10">
           <div className="lg:pt-1">
-            <a
-              href="/"
+            <Link
+              to="/"
               className="text-[clamp(1.75rem,4vw,2.5rem)] font-bold lowercase tracking-tight text-white"
               style={{ fontFamily: "'Instrument Serif', serif" }}
             >
               solver.
-            </a>
+            </Link>
           </div>
 
           <FooterColumn title="Contact">
-            <a href="mailto:solvershq@gmail.com" className="transition hover:text-white">
-              solvershq@gmail.com
+            <a href={`mailto:${CONTACT_EMAIL}`} className="transition hover:text-white">
+              {CONTACT_EMAIL}
             </a>
+            <div className="flex items-center gap-3 pt-1">
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-[#25D366] transition hover:border-[#25D366]/50 hover:bg-white/5"
+                aria-label="Chat on WhatsApp"
+              >
+                <WhatsAppIcon className="h-5 w-5" />
+              </a>
+              <span className="text-white/45">WhatsApp</span>
+            </div>
           </FooterColumn>
 
           <FooterColumn title="Legal">
-            <a
-              href="/privacy-policy"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transition hover:text-white"
-            >
+            <Link to="/privacy-policy" className="transition hover:text-white">
               Privacy Policy
-            </a>
-            <a
-              href="/terms-of-use"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transition hover:text-white"
-            >
+            </Link>
+            <Link to="/terms-of-use" className="transition hover:text-white">
               Terms of Use
-            </a>
+            </Link>
           </FooterColumn>
 
           <div className="flex flex-col items-start gap-6 max-lg:col-span-2 sm:col-span-2 lg:col-span-1 lg:items-end lg:text-right">

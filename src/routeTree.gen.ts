@@ -10,7 +10,9 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TermsOfUseRouteImport } from './routes/terms-of-use'
+import { Route as SubscriptionsRouteImport } from './routes/subscriptions'
 import { Route as ServicesRouteImport } from './routes/services'
+import { Route as ReachUsRouteImport } from './routes/reach-us'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as IndexRouteImport } from './routes/index'
 
@@ -19,9 +21,19 @@ const TermsOfUseRoute = TermsOfUseRouteImport.update({
   path: '/terms-of-use',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SubscriptionsRoute = SubscriptionsRouteImport.update({
+  id: '/subscriptions',
+  path: '/subscriptions',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReachUsRoute = ReachUsRouteImport.update({
+  id: '/reach-us',
+  path: '/reach-us',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
@@ -38,34 +50,61 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
+  '/reach-us': typeof ReachUsRoute
   '/services': typeof ServicesRoute
+  '/subscriptions': typeof SubscriptionsRoute
   '/terms-of-use': typeof TermsOfUseRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
+  '/reach-us': typeof ReachUsRoute
   '/services': typeof ServicesRoute
+  '/subscriptions': typeof SubscriptionsRoute
   '/terms-of-use': typeof TermsOfUseRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
+  '/reach-us': typeof ReachUsRoute
   '/services': typeof ServicesRoute
+  '/subscriptions': typeof SubscriptionsRoute
   '/terms-of-use': typeof TermsOfUseRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/privacy-policy' | '/services' | '/terms-of-use'
+  fullPaths:
+    | '/'
+    | '/privacy-policy'
+    | '/reach-us'
+    | '/services'
+    | '/subscriptions'
+    | '/terms-of-use'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/privacy-policy' | '/services' | '/terms-of-use'
-  id: '__root__' | '/' | '/privacy-policy' | '/services' | '/terms-of-use'
+  to:
+    | '/'
+    | '/privacy-policy'
+    | '/reach-us'
+    | '/services'
+    | '/subscriptions'
+    | '/terms-of-use'
+  id:
+    | '__root__'
+    | '/'
+    | '/privacy-policy'
+    | '/reach-us'
+    | '/services'
+    | '/subscriptions'
+    | '/terms-of-use'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
+  ReachUsRoute: typeof ReachUsRoute
   ServicesRoute: typeof ServicesRoute
+  SubscriptionsRoute: typeof SubscriptionsRoute
   TermsOfUseRoute: typeof TermsOfUseRoute
 }
 
@@ -78,11 +117,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TermsOfUseRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/subscriptions': {
+      id: '/subscriptions'
+      path: '/subscriptions'
+      fullPath: '/subscriptions'
+      preLoaderRoute: typeof SubscriptionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services': {
       id: '/services'
       path: '/services'
       fullPath: '/services'
       preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reach-us': {
+      id: '/reach-us'
+      path: '/reach-us'
+      fullPath: '/reach-us'
+      preLoaderRoute: typeof ReachUsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacy-policy': {
@@ -105,7 +158,9 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
+  ReachUsRoute: ReachUsRoute,
   ServicesRoute: ServicesRoute,
+  SubscriptionsRoute: SubscriptionsRoute,
   TermsOfUseRoute: TermsOfUseRoute,
 }
 export const routeTree = rootRouteImport

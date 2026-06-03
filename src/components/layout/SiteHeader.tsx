@@ -34,9 +34,12 @@ export function SiteHeader({
           <Link to="/services" className={`text-sm transition-colors ${textMuted}`}>
             Services
           </Link>
-          <a href="/#contact" className={`text-sm transition-colors ${textMuted}`}>
+          <Link to="/subscriptions" className={`text-sm transition-colors ${textMuted}`}>
+            Subscriptions
+          </Link>
+          <Link to="/reach-us" className={`text-sm transition-colors ${textMuted}`}>
             Reach Us
-          </a>
+          </Link>
         </div>
       ) : (
         <div className="hidden flex-1 lg:block" aria-hidden />
