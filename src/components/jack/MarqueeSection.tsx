@@ -1,19 +1,20 @@
 import { useEffect, useRef } from "react";
+import { useAppReady } from "@/contexts/app-ready";
 import { useLazyInView } from "@/hooks/use-lazy-in-view";
-import { LazyGif } from "./LazyGif";
+import { LazyPreviewVideo } from "./LazyPreviewVideo";
 
-import heroSpaceVoyage from "@/assets/gif/hero-space-voyage-preview-eECLH3Yc.gif";
-import heroCodenest from "@/assets/gif/hero-codenest-preview-Cgppc2qV.gif";
-import heroVexVentures from "@/assets/gif/hero-vex-ventures-preview-BczMFIiw.gif";
-import heroStellarAiV2 from "@/assets/gif/hero-stellar-ai-v2-preview-DjvxjG3C.gif";
-import heroStellarAi from "@/assets/gif/hero-stellar-ai-preview-D3HL6bw1.gif";
-import heroXportfolio from "@/assets/gif/hero-xportfolio-preview-D4A8maiC.gif";
-import heroOrbitWeb3 from "@/assets/gif/hero-orbit-web3-preview-BXt4OttD.gif";
-import heroNexora from "@/assets/gif/hero-nexora-preview-cx5HmUgo.gif";
-import heroEvrVentures from "@/assets/gif/hero-evr-ventures-preview-DZxeVFEX.gif";
-import heroPortal from "@/assets/gif/hero-portal-preview-DEscBr2T.gif";
+import heroSpaceVoyage from "@/assets/gif/hero-space-voyage-preview-eECLH3Yc.mp4";
+import heroCodenest from "@/assets/gif/hero-codenest-preview-Cgppc2qV.mp4";
+import heroVexVentures from "@/assets/gif/hero-vex-ventures-preview-BczMFIiw.mp4";
+import heroStellarAiV2 from "@/assets/gif/hero-stellar-ai-v2-preview-DjvxjG3C.mp4";
+import heroStellarAi from "@/assets/gif/hero-stellar-ai-preview-D3HL6bw1.mp4";
+import heroXportfolio from "@/assets/gif/hero-xportfolio-preview-D4A8maiC.mp4";
+import heroOrbitWeb3 from "@/assets/gif/hero-orbit-web3-preview-BXt4OttD.mp4";
+import heroNexora from "@/assets/gif/hero-nexora-preview-cx5HmUgo.mp4";
+import heroEvrVentures from "@/assets/gif/hero-evr-ventures-preview-DZxeVFEX.mp4";
+import heroPortal from "@/assets/gif/hero-portal-preview-DEscBr2T.mp4";
 
-const IMAGES = [
+const PREVIEWS = [
   heroSpaceVoyage,
   heroCodenest,
   heroVexVentures,
@@ -26,21 +27,22 @@ const IMAGES = [
   heroPortal,
 ];
 
-const ROW1 = IMAGES.slice(0, 5);
-const ROW2 = IMAGES.slice(5);
+const ROW1 = PREVIEWS.slice(0, 5);
+const ROW2 = PREVIEWS.slice(5);
 
 function Row({ items }: { items: string[] }) {
   const doubled = [...items, ...items];
   return (
     <div className="flex gap-3">
       {doubled.map((src, i) => (
-        <LazyGif key={`${src}-${i}`} src={src} />
+        <LazyPreviewVideo key={`${src}-${i}`} src={src} />
       ))}
     </div>
   );
 }
 
 export function MarqueeSection() {
+  const { ready } = useAppReady();
   const row1Ref = useRef<HTMLDivElement>(null);
   const row2Ref = useRef<HTMLDivElement>(null);
   const rafRef = useRef(0);
@@ -50,7 +52,7 @@ export function MarqueeSection() {
   });
 
   useEffect(() => {
-    if (!sectionInView) return;
+    if (!ready || !sectionInView) return;
 
     const onScroll = () => {
       if (rafRef.current) return;
@@ -72,7 +74,17 @@ export function MarqueeSection() {
       window.removeEventListener("scroll", onScroll);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
-  }, [sectionInView, sectionRef]);
+  }, [ready, sectionInView, sectionRef]);
+
+  if (!ready) {
+    return (
+      <section
+        className="pt-24 sm:pt-32 md:pt-40 pb-10"
+        style={{ background: "#0C0C0C", minHeight: 320 }}
+        aria-hidden
+      />
+    );
+  }
 
   return (
     <section

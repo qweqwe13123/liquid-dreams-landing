@@ -1,11 +1,11 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
+import { useAppReady } from "@/contexts/app-ready";
 import { LiveProjectButton } from "./LiveProjectButton";
-import { useLazyInView } from "@/hooks/use-lazy-in-view";
 
-import video1 from "@/assets/video/Video Project 1.mp4";
-import video2 from "@/assets/video/copy_8F24B367-2150-405E-BFE2-44EAB65AE0B8.mp4";
-import video3 from "@/assets/video/Video Project 1 copy.mp4";
+import video1 from "@/assets/video/Video Project 1.mp4?url";
+import video2 from "@/assets/video/copy_8F24B367-2150-405E-BFE2-44EAB65AE0B8.mp4?url";
+import video3 from "@/assets/video/Video Project 1 copy.mp4?url";
 
 const PROJECTS = [
   { n: "01", category: "Client", name: "Nextlevel Studio", video: video1 },
@@ -14,26 +14,44 @@ const PROJECTS = [
 ] as const;
 
 function ProjectCard({ project }: { project: (typeof PROJECTS)[number] }) {
+  const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const { ref, inView: shouldLoad } = useLazyInView<HTMLElement>({
-    rootMargin: "500px 0px",
-    unloadWhenHidden: true,
+  const [videoSrc, setVideoSrc] = useState<string | null>(null);
+
+  const isNear = useInView(containerRef, {
+    once: true,
+    margin: "400px 0px",
+    amount: 0.1,
   });
-  const isActive = useInView(ref, { amount: 0.45, margin: "-15% 0px -15% 0px" });
+
+  const isActive = useInView(containerRef, {
+    amount: 0.35,
+    margin: "-10% 0px -10% 0px",
+  });
 
   useEffect(() => {
-    const v = videoRef.current;
-    if (!v || !shouldLoad) return;
-    if (isActive) v.play().catch(() => {});
-    else {
-      v.pause();
-      v.currentTime = 0;
+    if (isNear && !videoSrc) {
+      setVideoSrc(project.video);
     }
-  }, [isActive, shouldLoad]);
+  }, [isNear, project.video, videoSrc]);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || !videoSrc) return;
+
+    const play = () => {
+      if (isActive) video.play().catch(() => {});
+      else video.pause();
+    };
+
+    if (video.readyState >= 2) play();
+    else video.addEventListener("loadeddata", play, { once: true });
+
+    return () => video.removeEventListener("loadeddata", play);
+  }, [isActive, videoSrc]);
 
   return (
     <motion.article
-      ref={ref}
       initial={{ opacity: 0, y: 48 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
@@ -41,21 +59,22 @@ function ProjectCard({ project }: { project: (typeof PROJECTS)[number] }) {
       className="relative mx-auto w-full max-w-6xl"
     >
       <div
-        className={`group relative overflow-hidden rounded-[32px] border border-[#D7E2EA]/15 bg-[#111] shadow-[0_40px_120px_-40px_rgba(0,0,0,0.8)] transition-opacity duration-500 sm:rounded-[44px] md:rounded-[56px] ${isActive ? "opacity-100" : "opacity-70"}`}
+        ref={containerRef}
+        className={`group relative overflow-hidden rounded-[32px] border border-[#D7E2EA]/15 bg-[#111] shadow-[0_40px_120px_-40px_rgba(0,0,0,0.8)] transition-opacity duration-500 sm:rounded-[44px] md:rounded-[56px] ${isActive ? "opacity-100" : "opacity-75"}`}
       >
         <div className="relative aspect-[16/10] w-full sm:aspect-[16/9]">
-          {shouldLoad ? (
+          {videoSrc ? (
             <video
               ref={videoRef}
-              src={project.video}
+              src={videoSrc}
               muted
               loop
               playsInline
-              preload="none"
+              preload="auto"
               className="absolute inset-0 h-full w-full object-cover"
             />
           ) : (
-            <div className="absolute inset-0 bg-[#1a1a1a]" aria-hidden />
+            <div className="absolute inset-0 animate-pulse bg-[#1a1a1a]" aria-hidden />
           )}
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
 
@@ -89,6 +108,18 @@ function ProjectCard({ project }: { project: (typeof PROJECTS)[number] }) {
 }
 
 export function ProjectsSection() {
+  const { ready } = useAppReady();
+
+  if (!ready) {
+    return (
+      <section
+        className="relative z-10 -mt-10 rounded-t-[40px] px-5 py-24 sm:-mt-12 sm:rounded-t-[50px] sm:px-8 sm:py-32 md:-mt-14 md:rounded-t-[60px] md:px-10"
+        style={{ background: "#0C0C0C", minHeight: 480 }}
+        aria-hidden
+      />
+    );
+  }
+
   return (
     <section
       className="relative z-10 -mt-10 rounded-t-[40px] px-5 py-24 sm:-mt-12 sm:rounded-t-[50px] sm:px-8 sm:py-32 md:-mt-14 md:rounded-t-[60px] md:px-10"

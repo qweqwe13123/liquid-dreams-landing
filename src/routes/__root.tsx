@@ -11,6 +11,8 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { AppReadyProvider, useAppReady } from "../contexts/app-ready";
+import { SiteLoader } from "../components/SiteLoader";
 
 function NotFoundComponent() {
   return (
@@ -117,13 +119,30 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
+function RootLayout() {
+  const { ready, exiting } = useAppReady();
+
+  return (
+    <>
+      {!ready && <SiteLoader exiting={exiting} />}
+      <div
+        className="transition-opacity duration-500"
+        style={{ opacity: ready ? 1 : 0 }}
+      >
+        <Outlet />
+      </div>
+    </>
+  );
+}
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <AppReadyProvider>
+        <RootLayout />
+      </AppReadyProvider>
     </QueryClientProvider>
   );
 }
