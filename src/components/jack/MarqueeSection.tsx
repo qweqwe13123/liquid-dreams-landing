@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { CtaButtons } from "./CtaButtons";
 import { LazyPreviewVideo } from "./LazyPreviewVideo";
 import { assetUrl } from "@/lib/asset-url";
 
@@ -75,17 +76,18 @@ export function MarqueeSection() {
       className="overflow-hidden pt-24 pb-10 sm:pt-32 md:pt-40"
       style={{ background: "#070B26", fontFamily: "'Kanit', sans-serif" }}
     >
-      <div className="px-6 md:px-12 lg:px-16 pb-12 md:pb-16 lg:pb-20 max-w-[1600px]">
+      <div className="max-w-[1600px] px-6 pb-12 md:px-12 md:pb-16 lg:px-16 lg:pb-20">
         <h2
-          className="font-normal tracking-tight leading-[1.05] text-[#D7DBE8]"
+          className="max-w-4xl font-normal leading-[1.12] tracking-[-0.02em] text-[#D7DBE8]/95"
           style={{
             fontFamily: "'Inter', sans-serif",
-            fontSize: "clamp(2.25rem, 6vw, 5.5rem)",
-            letterSpacing: "-0.03em",
+            fontSize: "clamp(1.5rem, 3.8vw, 3.25rem)",
+            fontWeight: 400,
           }}
         >
-          Explore next-gen 3D Websites and Regular Websites made in SolverCompany.
+          Explore next-gen 3D Websites and Regular Websites made in Solver Company.
         </h2>
+        <CtaButtons className="mt-8 sm:mt-10" />
       </div>
       <div className="flex flex-col gap-3">
         <div ref={row1Ref} className="will-change-transform">

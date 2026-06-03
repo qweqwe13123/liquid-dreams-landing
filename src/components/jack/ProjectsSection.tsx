@@ -87,7 +87,7 @@ export function ProjectsSection() {
   return (
     <section
       className="relative z-10 -mt-10 rounded-t-[40px] px-5 py-24 sm:-mt-12 sm:rounded-t-[50px] sm:px-8 sm:py-32 md:-mt-14 md:rounded-t-[60px] md:px-10"
-      style={{ background: "#0C0C0C", fontFamily: "'Kanit', sans-serif" }}
+      style={{ background: "#070B26", fontFamily: "'Kanit', sans-serif" }}
     >
       <motion.h2
         initial={{ opacity: 0, y: 30 }}
@@ -97,7 +97,7 @@ export function ProjectsSection() {
         className="hero-heading mb-20 text-center font-black uppercase leading-none tracking-tight sm:mb-28"
         style={{ fontSize: "clamp(3rem, 12vw, 160px)" }}
       >
-        Project
+        PROJECTS 2-
       </motion.h2>
 
       <div className="flex flex-col gap-24 sm:gap-32 md:gap-40">

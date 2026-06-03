@@ -60,7 +60,7 @@ export function AboutSection() {
   return (
     <section
       className="relative min-h-screen flex flex-col items-center justify-center px-5 sm:px-8 md:px-10 py-20 overflow-hidden"
-      style={{ background: "#0C0C0C", fontFamily: "'Kanit', sans-serif" }}
+      style={{ background: "#070B26", fontFamily: "'Kanit', sans-serif" }}
     >
       <FadeIn delay={0.1} x={-80} y={0} duration={0.9}
         className="absolute top-[4%] left-[1%] sm:left-[2%] md:left-[4%] w-[120px] sm:w-[160px] md:w-[210px]">
