@@ -73,8 +73,20 @@ export function MarqueeSection() {
     <section
       ref={sectionRef}
       className="overflow-hidden pt-24 pb-10 sm:pt-32 md:pt-40"
-      style={{ background: "#0C0C0C", fontFamily: "'Kanit', sans-serif" }}
+      style={{ background: "#070B26", fontFamily: "'Kanit', sans-serif" }}
     >
+      <div className="px-6 md:px-12 lg:px-16 pb-12 md:pb-16 lg:pb-20 max-w-[1600px]">
+        <h2
+          className="font-normal tracking-tight leading-[1.05] text-[#D7DBE8]"
+          style={{
+            fontFamily: "'Inter', sans-serif",
+            fontSize: "clamp(2.25rem, 6vw, 5.5rem)",
+            letterSpacing: "-0.03em",
+          }}
+        >
+          Explore next-gen 3D Websites and Regular Websites made in SolverCompany.
+        </h2>
+      </div>
       <div className="flex flex-col gap-3">
         <div ref={row1Ref} className="will-change-transform">
           <Row items={ROW1} />
