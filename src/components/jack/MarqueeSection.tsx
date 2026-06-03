@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { LazyPreviewVideo } from "./LazyPreviewVideo";
+import { assetUrl } from "@/lib/asset-url";
 
 import heroSpaceVoyage from "@/assets/gif/hero-space-voyage-preview-eECLH3Yc.mp4.asset.json";
 import heroCodenest from "@/assets/gif/hero-codenest-preview-Cgppc2qV.mp4.asset.json";
@@ -13,17 +14,17 @@ import heroEvrVentures from "@/assets/gif/hero-evr-ventures-preview-DZxeVFEX.mp4
 import heroPortal from "@/assets/gif/hero-portal-preview-DEscBr2T.mp4.asset.json";
 
 const PREVIEWS = [
-  heroSpaceVoyage.url,
-  heroCodenest.url,
-  heroVexVentures.url,
-  heroStellarAiV2.url,
-  heroStellarAi.url,
-  heroXportfolio.url,
-  heroOrbitWeb3.url,
-  heroNexora.url,
-  heroEvrVentures.url,
-  heroPortal.url,
-];
+  heroSpaceVoyage,
+  heroCodenest,
+  heroVexVentures,
+  heroStellarAiV2,
+  heroStellarAi,
+  heroXportfolio,
+  heroOrbitWeb3,
+  heroNexora,
+  heroEvrVentures,
+  heroPortal,
+].map(assetUrl);
 
 const ROW1 = PREVIEWS.slice(0, 5);
 const ROW2 = PREVIEWS.slice(5);
