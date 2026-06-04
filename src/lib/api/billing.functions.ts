@@ -50,7 +50,7 @@ export const createCheckoutSession = createServerFn({ method: "POST" })
 
     const session = await stripe.checkout.sessions.create({
       mode: "subscription",
-      ui_mode: "embedded",
+      ui_mode: "embedded" as never,
       customer: customerId,
       line_items: [{ price: priceId, quantity: 1 }],
       subscription_data: {
@@ -134,9 +134,9 @@ export const cancelMySubscription = createServerFn({ method: "POST" })
     if (error) throw new Error(error.message);
     if (!sub) throw new Error("No active subscription found");
 
-    const updated = await stripe.subscriptions.update(sub.stripe_subscription_id, {
+    const updated = (await stripe.subscriptions.update(sub.stripe_subscription_id, {
       cancel_at_period_end: true,
-    });
+    })) as unknown as { cancel_at_period_end: boolean; current_period_end: number };
 
     return {
       cancelAtPeriodEnd: updated.cancel_at_period_end,
