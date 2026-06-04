@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { useAutoplayVideo } from "@/hooks/use-autoplay-video";
+import { useLazyInView } from "@/hooks/use-lazy-in-view";
 
 type LazyPreviewVideoProps = {
   src: string;
@@ -8,9 +9,16 @@ type LazyPreviewVideoProps = {
 };
 
 export function LazyPreviewVideo({ src, width = 420, height = 270 }: LazyPreviewVideoProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  useAutoplayVideo(containerRef, videoRef, { rootMargin: "120px 0px", amount: 0.15 });
+  const { ref: containerRef, inView: shouldLoad } = useLazyInView<HTMLDivElement>({
+    rootMargin: "200px 0px",
+    unloadWhenHidden: true,
+  });
+  const { shouldPlay } = useAutoplayVideo(containerRef, videoRef, {
+    rootMargin: "120px 0px",
+    amount: 0.15,
+    enabled: shouldLoad,
+  });
 
   return (
     <div
@@ -20,12 +28,12 @@ export function LazyPreviewVideo({ src, width = 420, height = 270 }: LazyPreview
     >
       <video
         ref={videoRef}
-        src={src}
+        src={shouldLoad ? src : undefined}
         muted
         loop
         autoPlay
         playsInline
-        preload="auto"
+        preload={shouldPlay ? "metadata" : "none"}
         className="h-full w-full object-cover"
         width={width}
         height={height}

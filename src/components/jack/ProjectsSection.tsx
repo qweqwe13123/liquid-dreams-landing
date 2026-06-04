@@ -2,23 +2,19 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { useAutoplayVideo } from "@/hooks/use-autoplay-video";
 import { LiveProjectButton } from "./LiveProjectButton";
-import { assetUrl } from "@/lib/asset-url";
-
-import video1 from "@/assets/project-1.mp4.asset.json";
-import video2 from "@/assets/project-2.mp4.asset.json";
-import video3 from "@/assets/project-3.mp4.asset.json";
+import { PROJECT_VIDEOS } from "@/lib/public-media";
 
 const PROJECTS = [
-  { n: "01", category: "Client", name: "Nextlevel Studio", video: assetUrl(video1) },
-  { n: "02", category: "Personal", name: "Aura Brand Identity", video: assetUrl(video2) },
-  { n: "03", category: "Client", name: "Solaris Digital", video: assetUrl(video3) },
+  { n: "01", category: "Client", name: "Nextlevel Studio", video: PROJECT_VIDEOS.project1 },
+  { n: "02", category: "Personal", name: "Aura Brand Identity", video: PROJECT_VIDEOS.project2 },
+  { n: "03", category: "Client", name: "Solaris Digital", video: PROJECT_VIDEOS.project3 },
 ] as const;
 
 function ProjectCard({ project }: { project: (typeof PROJECTS)[number] }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const isInView = useInView(containerRef, { amount: 0.25, margin: "-5% 0px" });
-  useAutoplayVideo(containerRef, videoRef, { amount: 0.2 });
+  const { shouldPlay } = useAutoplayVideo(containerRef, videoRef, { amount: 0.2 });
 
   return (
     <motion.article
@@ -40,7 +36,7 @@ function ProjectCard({ project }: { project: (typeof PROJECTS)[number] }) {
             loop
             autoPlay
             playsInline
-            preload="auto"
+            preload={shouldPlay ? "metadata" : "none"}
             className="absolute inset-0 h-full w-full object-cover"
           />
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />

@@ -1,36 +1,12 @@
 import { useEffect, useRef } from "react";
 import { CtaButtons } from "./CtaButtons";
 import { LazyPreviewVideo } from "./LazyPreviewVideo";
-import { assetUrl } from "@/lib/asset-url";
+import { SHORT_VIDEOS } from "@/lib/public-media";
 
-import heroSpaceVoyage from "@/assets/gif/hero-space-voyage-preview-eECLH3Yc.mp4.asset.json";
-import heroCodenest from "@/assets/gif/hero-codenest-preview-Cgppc2qV.mp4.asset.json";
-import heroVexVentures from "@/assets/gif/hero-vex-ventures-preview-BczMFIiw.mp4.asset.json";
-import heroStellarAiV2 from "@/assets/gif/hero-stellar-ai-v2-preview-DjvxjG3C.mp4.asset.json";
-import heroStellarAi from "@/assets/gif/hero-stellar-ai-preview-D3HL6bw1.mp4.asset.json";
-import heroXportfolio from "@/assets/gif/hero-xportfolio-preview-D4A8maiC.mp4.asset.json";
-import heroOrbitWeb3 from "@/assets/gif/hero-orbit-web3-preview-BXt4OttD.mp4.asset.json";
-import heroNexora from "@/assets/gif/hero-nexora-preview-cx5HmUgo.mp4.asset.json";
-import heroEvrVentures from "@/assets/gif/hero-evr-ventures-preview-DZxeVFEX.mp4.asset.json";
-import heroPortal from "@/assets/gif/hero-portal-preview-DEscBr2T.mp4.asset.json";
+const ROW1 = SHORT_VIDEOS.slice(0, 5);
+const ROW2 = SHORT_VIDEOS.slice(5);
 
-const PREVIEWS = [
-  heroSpaceVoyage,
-  heroCodenest,
-  heroVexVentures,
-  heroStellarAiV2,
-  heroStellarAi,
-  heroXportfolio,
-  heroOrbitWeb3,
-  heroNexora,
-  heroEvrVentures,
-  heroPortal,
-].map(assetUrl);
-
-const ROW1 = PREVIEWS.slice(0, 5);
-const ROW2 = PREVIEWS.slice(5);
-
-function Row({ items }: { items: string[] }) {
+function Row({ items }: { items: readonly string[] }) {
   const doubled = [...items, ...items];
   return (
     <div className="flex gap-3">
