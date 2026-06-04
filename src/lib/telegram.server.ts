@@ -1,12 +1,10 @@
 import type { LeadPayload } from "./lead-schema";
 
-function getTelegramConfig() {
-  const token = process.env.TELEGRAM_BOT_TOKEN?.trim();
-  const chatId = process.env.TELEGRAM_CHAT_ID?.trim();
+import { env } from "./env.server";
 
-  if (!token || !chatId) {
-    throw new Error("Telegram is not configured on the server.");
-  }
+function getTelegramConfig() {
+  const token = env.TELEGRAM_BOT_TOKEN;
+  const chatId = env.TELEGRAM_CHAT_ID;
 
   return { token, chatId };
 }

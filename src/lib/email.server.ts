@@ -1,13 +1,13 @@
 import { Resend } from "resend";
 import { BRAND } from "./stripe-config";
 
+import { env } from "./env.server";
+
 let _resend: Resend | null = null;
 
 function resend(): Resend {
   if (_resend) return _resend;
-  const key = process.env.RESEND_API_KEY;
-  if (!key) throw new Error("RESEND_API_KEY is not configured");
-  _resend = new Resend(key);
+  _resend = new Resend(env.RESEND_API_KEY);
   return _resend;
 }
 
