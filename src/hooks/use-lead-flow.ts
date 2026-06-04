@@ -83,7 +83,7 @@ export function useLeadFlow() {
   );
 
   const advanceAfterAnswer = useCallback(
-    (key: keyof LeadPayload, value: string, nextAnswers: Answers) => {
+    (key: LeadFlowStep, value: string, nextAnswers: Answers) => {
       pushUser(value, nextAnswers);
 
       switch (key) {

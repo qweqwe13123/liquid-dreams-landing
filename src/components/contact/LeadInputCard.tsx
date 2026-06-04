@@ -287,7 +287,7 @@ export function LeadInputCard({
         </p>
       ) : null}
 
-      {disabled && step !== "done" ? (
+      {disabled && (step as string) !== "done" ? (
         <p className="mt-4 text-center text-sm text-[#a39a90]">Sending…</p>
       ) : null}
     </div>
