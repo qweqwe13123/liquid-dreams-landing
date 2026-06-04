@@ -8,7 +8,7 @@ const LINKS = [
   { label: "Home", to: "/" as const },
   { label: "Services", to: "/services" as const },
   { label: "Subscriptions", to: "/subscriptions" as const },
-  { label: "Reach Us", to: "/reach-us" as const },
+  { label: "Reach Us", to: "/contact" as const },
 ] as const;
 
 type MobileNavProps = {

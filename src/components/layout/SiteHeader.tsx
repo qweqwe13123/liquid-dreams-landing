@@ -37,7 +37,7 @@ export function SiteHeader({
           <Link to="/subscriptions" className={`text-sm transition-colors ${textMuted}`}>
             Subscriptions
           </Link>
-          <Link to="/reach-us" className={`text-sm transition-colors ${textMuted}`}>
+          <Link to="/contact" className={`text-sm transition-colors ${textMuted}`}>
             Reach Us
           </Link>
         </div>
@@ -50,8 +50,8 @@ export function SiteHeader({
         {showDesktopCta ? (
           <div className="hidden lg:block">
             {desktopCta ?? (
-              <button
-                type="button"
+              <Link
+                to="/contact"
                 className={`rounded-full px-6 py-2.5 text-sm transition-transform hover:scale-[1.03] ${
                   variant === "dark"
                     ? "border border-white/20 bg-white/10 text-white"
@@ -59,7 +59,7 @@ export function SiteHeader({
                 }`}
               >
                 Begin Journey
-              </button>
+              </Link>
             )}
           </div>
         ) : null}

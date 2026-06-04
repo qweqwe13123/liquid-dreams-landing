@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { HeroScrollHint } from "@/components/hero/HeroScrollHint";
 import { HeroSocialProof } from "@/components/hero/HeroSocialProof";
 import { HeroStatsBar } from "@/components/hero/HeroStatsBar";
@@ -88,12 +88,12 @@ function Index() {
             build digital spaces for sharp focus and inspired work.
           </p>
           <HeroSocialProof />
-          <button
-            type="button"
-            className="liquid-glass mt-8 cursor-pointer rounded-full px-10 py-4 text-sm text-foreground transition-transform hover:scale-[1.03] max-lg:w-full max-lg:max-w-xs sm:mt-10 sm:px-14 sm:py-5 sm:text-base lg:mt-12 lg:w-auto"
+          <Link
+            to="/contact"
+            className="liquid-glass mt-8 inline-flex cursor-pointer items-center justify-center rounded-full px-10 py-4 text-sm text-foreground transition-transform hover:scale-[1.03] max-lg:w-full max-lg:max-w-xs sm:mt-10 sm:px-14 sm:py-5 sm:text-base lg:mt-12 lg:w-auto"
           >
             Begin Journey
-          </button>
+          </Link>
         </div>
 
         <div className="relative z-10 flex flex-col items-center gap-4 px-4 pb-8 pt-4 max-lg:static max-lg:mt-2 lg:absolute lg:bottom-2 lg:left-0 lg:right-0 lg:gap-5 lg:pb-0 lg:pt-0 lg:sm:bottom-3 lg:md:gap-6">

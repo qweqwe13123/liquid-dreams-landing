@@ -66,12 +66,12 @@ export function FooterSection() {
               <br />
               Exceptional
             </h3>
-            <button
-              type="button"
+            <Link
+              to="/contact"
               className="rounded-full bg-black px-8 py-3.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white transition hover:bg-white hover:text-black"
             >
               Start Your Project
-            </button>
+            </Link>
           </div>
         </div>
 

@@ -46,7 +46,7 @@ export function HeroSocialProof() {
         <span className="font-semibold text-white">more than 1000</span>
         <span className="text-white/50"> • </span>
         tech investors join the club.{" "}
-        <a href="#contact" className="font-semibold text-white underline-offset-2 hover:underline">
+        <a href="/contact" className="font-semibold text-white underline-offset-2 hover:underline">
           Join us!
         </a>
       </p>

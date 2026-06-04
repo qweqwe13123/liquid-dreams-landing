@@ -45,7 +45,7 @@ export function UseCaseCard({
           {useCase.description}
         </p>
         <a
-          href={useCase.href ?? "#contact"}
+          href={useCase.href ?? "/contact"}
           className="mt-1 inline-flex items-center gap-1.5 text-[15px] font-medium text-white transition-opacity group-hover:opacity-80"
           style={{ fontFamily: "'Inter', sans-serif" }}
         >
