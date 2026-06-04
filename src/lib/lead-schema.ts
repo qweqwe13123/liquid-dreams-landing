@@ -2,34 +2,46 @@ import { z } from "zod";
 
 export const leadSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(200),
+  role: z.string().trim().min(1, "Please tell us who you are").max(100),
   company: z.string().trim().min(1, "Company name is required").max(200),
-  service: z.string().trim().min(1, "Service is required").max(500),
-  budget: z.string().trim().min(1, "Budget is required").max(100),
   email: z.string().trim().email("Please enter a valid email address").max(320),
+  service: z.string().trim().min(1, "Please select or describe a service").max(500),
+  budget: z.string().trim().min(1, "Please select or enter a budget").max(200),
+  timeline: z.string().trim().min(1, "Please select a timeline").max(100),
 });
 
 export type LeadPayload = z.infer<typeof leadSchema>;
 
-export const LEAD_QUESTIONS = [
-  { key: "name" as const, prompt: "What is your name?" },
-  { key: "company" as const, prompt: "What is your company name?" },
-  { key: "service" as const, prompt: "What service are you interested in?" },
-  { key: "budget" as const, prompt: "What is your budget?" },
-  { key: "email" as const, prompt: "What is your email address?" },
+export type LeadFlowStep =
+  | "name"
+  | "role"
+  | "company"
+  | "email"
+  | "service"
+  | "budget"
+  | "timeline"
+  | "done";
+
+export const SERVICE_OPTIONS = [
+  "Web & app development",
+  "UI/UX design",
+  "Branding & identity",
+  "Automation & integrations",
+  "Marketing & growth",
+  "Other",
 ] as const;
 
-export type LeadFieldKey = (typeof LEAD_QUESTIONS)[number]["key"];
+export const BUDGET_OPTIONS = [
+  "Less than $1,000",
+  "$1,000 - $5,000",
+  "$5,000 - $15,000",
+  "$15,000+",
+  "Other",
+] as const;
 
-const fieldSchemas: Record<LeadFieldKey, z.ZodString> = {
-  name: leadSchema.shape.name,
-  company: leadSchema.shape.company,
-  service: leadSchema.shape.service,
-  budget: leadSchema.shape.budget,
-  email: leadSchema.shape.email,
-};
-
-export function validateLeadField(key: LeadFieldKey, value: string): string | null {
-  const result = fieldSchemas[key].safeParse(value);
-  if (result.success) return null;
-  return result.error.errors[0]?.message ?? "Invalid input";
-}
+export const TIMELINE_OPTIONS = [
+  "ASAP",
+  "1 - 2 weeks",
+  "1 - 2 months",
+  "No rush, flexible",
+] as const;

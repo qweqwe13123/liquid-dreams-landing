@@ -16,10 +16,12 @@ function formatLeadMessage(lead: LeadPayload): string {
     "🔥 New Lead",
     "",
     `👤 Name: ${lead.name}`,
+    `💼 Role: ${lead.role}`,
     `🏢 Company: ${lead.company}`,
+    `📧 Email: ${lead.email}`,
     `⚙️ Service: ${lead.service}`,
     `💰 Budget: ${lead.budget}`,
-    `📧 Email: ${lead.email}`,
+    `📅 Timeline: ${lead.timeline}`,
   ].join("\n");
 }
 
