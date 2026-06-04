@@ -67,7 +67,7 @@ export function useLeadFlow() {
       setStatus("submitting");
       setError(null);
       try {
-        await submitLead({ data: payload });
+        await submitLead(payload);
         pushBot(
           "bot-light",
           `Thank you, ${displayName}! I'll be in touch soon 🙌\n\nIn the meantime, feel free to reach out anytime.`,
@@ -101,10 +101,7 @@ export function useLeadFlow() {
           break;
         }
         case "email":
-          pushBot(
-            "bot-dark",
-            "How can we also reach you on WhatsApp or Telegram?",
-          );
+          pushBot("bot-dark", "How can we also reach you on WhatsApp or Telegram?");
           setStep("messenger");
           break;
         case "messenger":
@@ -273,10 +270,10 @@ export function useLeadFlow() {
   };
 }
 
-export function useScrollToBottom(deps: unknown[]) {
+export function useScrollToBottom(dep1: unknown, dep2: unknown, dep3: unknown) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     ref.current?.scrollTo({ top: ref.current.scrollHeight, behavior: "smooth" });
-  }, deps);
+  }, [dep1, dep2, dep3]);
   return ref;
 }

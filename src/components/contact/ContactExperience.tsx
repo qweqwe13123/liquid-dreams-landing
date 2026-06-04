@@ -4,14 +4,19 @@ import { ArrowLeft, MessageCircle, Send } from "lucide-react";
 import { LeadConversationPanel } from "@/components/contact/LeadConversationPanel";
 import { LeadInputCard } from "@/components/contact/LeadInputCard";
 import { useLeadFlow, useScrollToBottom } from "@/hooks/use-lead-flow";
-import { CTA_WHATSAPP_DISPLAY, CTA_WHATSAPP_URL, TELEGRAM_DISPLAY, TELEGRAM_URL } from "@/lib/contact";
+import {
+  CTA_WHATSAPP_DISPLAY,
+  CTA_WHATSAPP_URL,
+  TELEGRAM_DISPLAY,
+  TELEGRAM_URL,
+} from "@/lib/contact";
 
 type Step = "choose" | "request";
 
 export function ContactExperience() {
   const [step, setStep] = useState<Step>("choose");
   const flow = useLeadFlow();
-  const scrollRef = useScrollToBottom([flow.messages, flow.step, flow.status]);
+  const scrollRef = useScrollToBottom(flow.messages, flow.step, flow.status);
 
   const startRequest = () => {
     flow.resetFlow();
@@ -138,7 +143,9 @@ export function ContactExperience() {
                     </span>
                     <span className="flex flex-col">
                       <span className="text-sm font-semibold text-[#2c2824]">Leave a request</span>
-                      <span className="text-sm text-[#8a8178]">Quick chat — we&apos;ll reach out soon</span>
+                      <span className="text-sm text-[#8a8178]">
+                        Quick chat — we&apos;ll reach out soon
+                      </span>
                     </span>
                   </button>
                 </li>
