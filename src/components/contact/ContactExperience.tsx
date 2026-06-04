@@ -1,29 +1,13 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowLeft, MessageCircle, Send } from "lucide-react";
-import {
-  CONTACT_EMAIL,
-  CTA_WHATSAPP_DISPLAY,
-  CTA_WHATSAPP_URL,
-  TELEGRAM_DISPLAY,
-  TELEGRAM_URL,
-} from "@/lib/contact";
+import { LeadChatQuestionnaire } from "@/components/contact/LeadChatQuestionnaire";
+import { CTA_WHATSAPP_DISPLAY, CTA_WHATSAPP_URL, TELEGRAM_DISPLAY, TELEGRAM_URL } from "@/lib/contact";
 
 type Step = "choose" | "request";
 
 export function ContactExperience() {
   const [step, setStep] = useState<Step>("choose");
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-
-  const submitRequest = () => {
-    const subject = encodeURIComponent("New contact request — Solver");
-    const body = encodeURIComponent(
-      `Name: ${name || "—"}\nEmail: ${email || "—"}\n\nMessage:\n${message || "—"}`,
-    );
-    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-  };
 
   return (
     <div
@@ -126,67 +110,14 @@ export function ContactExperience() {
                       </span>
                       <span className="flex flex-col">
                         <span className="text-sm font-semibold text-[#2c2824]">Leave a request</span>
-                        <span className="text-sm text-[#8a8178]">We&apos;ll get back to you by email</span>
+                        <span className="text-sm text-[#8a8178]">Quick chat — we&apos;ll reach out soon</span>
                       </span>
                     </button>
                   </li>
                 </ul>
               </>
             ) : (
-              <>
-                <button
-                  type="button"
-                  onClick={() => setStep("choose")}
-                  className="text-sm text-[#a39a90] transition-colors hover:text-[#2c2824]"
-                >
-                  ← Back
-                </button>
-                <p className="mt-4 text-sm text-[#a39a90]">Leave a request</p>
-                <h2 className="mt-1 text-xl font-medium text-[#2c2824]">Tell us a bit about you</h2>
-
-                <div className="mt-8 space-y-6">
-                  <label className="block">
-                    <span className="text-sm text-[#a39a90]">My name is</span>
-                    <input
-                      type="text"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      placeholder="Your name…"
-                      className="mt-2 w-full border-0 border-b border-[#e0d9cf] bg-transparent py-2 text-[#2c2824] placeholder:text-[#c4bcb2] placeholder:italic focus:border-[#2c2824] focus:outline-none"
-                    />
-                  </label>
-                  <label className="block">
-                    <span className="text-sm text-[#a39a90]">Email</span>
-                    <input
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="you@company.com"
-                      className="mt-2 w-full border-0 border-b border-[#e0d9cf] bg-transparent py-2 text-[#2c2824] placeholder:text-[#c4bcb2] placeholder:italic focus:border-[#2c2824] focus:outline-none"
-                    />
-                  </label>
-                  <label className="block">
-                    <span className="text-sm text-[#a39a90]">Message</span>
-                    <textarea
-                      value={message}
-                      onChange={(e) => setMessage(e.target.value)}
-                      placeholder="What would you like to build?"
-                      rows={3}
-                      className="mt-2 w-full resize-none border-0 border-b border-[#e0d9cf] bg-transparent py-2 text-[#2c2824] placeholder:text-[#c4bcb2] placeholder:italic focus:border-[#2c2824] focus:outline-none"
-                    />
-                  </label>
-                </div>
-
-                <div className="mt-8 flex justify-end">
-                  <button
-                    type="button"
-                    onClick={submitRequest}
-                    className="rounded-lg border border-[#e0d9cf] px-4 py-2 text-sm font-medium text-[#6b6560] transition-colors hover:border-[#2c2824] hover:text-[#2c2824]"
-                  >
-                    Send ↵
-                  </button>
-                </div>
-              </>
+              <LeadChatQuestionnaire onBack={() => setStep("choose")} />
             )}
           </div>
         </div>
