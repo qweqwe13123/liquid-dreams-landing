@@ -12,6 +12,7 @@ type LeadInputCardProps = {
   disabled: boolean;
   onSubmitText: () => void;
   onSubmitChoice: () => void;
+  onSkipMessenger?: () => void;
 };
 
 function OkButton({ onClick, disabled }: { onClick: () => void; disabled: boolean }) {
@@ -85,6 +86,7 @@ export function LeadInputCard({
   disabled,
   onSubmitText,
   onSubmitChoice,
+  onSkipMessenger,
 }: LeadInputCardProps) {
   if (step === "done") return null;
 
@@ -175,6 +177,40 @@ export function LeadInputCard({
             className="mt-3 w-full border-0 border-b border-[#e0d9cf] bg-transparent py-2 text-lg text-[#2c2824] placeholder:text-[#c4bcb2] placeholder:italic focus:border-[#2c2824] focus:outline-none disabled:opacity-50"
           />
           <div className="mt-8 flex justify-end">
+            <OkButton onClick={onSubmitText} disabled={disabled || !textInput.trim()} />
+          </div>
+        </>
+      ) : null}
+
+      {step === "messenger" ? (
+        <>
+          <p className="text-sm text-[#a39a90]">You can also reach me on</p>
+          <p className="mt-1 text-xs leading-relaxed text-[#b5aea4]">
+            WhatsApp or Telegram — phone number, @username, or link
+          </p>
+          <input
+            type="text"
+            value={textInput}
+            onChange={(e) => onTextChange(e.target.value)}
+            placeholder="+1 205… or @username or t.me/…"
+            disabled={disabled}
+            autoFocus
+            autoComplete="tel"
+            className="mt-3 w-full border-0 border-b border-[#e0d9cf] bg-transparent py-2 text-lg text-[#2c2824] placeholder:text-[#c4bcb2] placeholder:italic focus:border-[#2c2824] focus:outline-none disabled:opacity-50"
+          />
+          <div className="mt-8 flex items-center justify-between gap-3">
+            {onSkipMessenger ? (
+              <button
+                type="button"
+                onClick={onSkipMessenger}
+                disabled={disabled}
+                className="text-sm text-[#a39a90] underline-offset-2 transition-colors hover:text-[#2c2824] hover:underline disabled:opacity-50"
+              >
+                Skip — email only
+              </button>
+            ) : (
+              <span />
+            )}
             <OkButton onClick={onSubmitText} disabled={disabled || !textInput.trim()} />
           </div>
         </>

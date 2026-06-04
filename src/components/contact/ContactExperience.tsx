@@ -167,6 +167,7 @@ export function ContactExperience() {
                   disabled={flow.status === "submitting"}
                   onSubmitText={() => void flow.submitTextStep()}
                   onSubmitChoice={() => void flow.submitChoiceStep()}
+                  onSkipMessenger={() => flow.skipMessenger()}
                 />
               ) : null}
             </div>

@@ -19,6 +19,7 @@ function formatLeadMessage(lead: LeadPayload): string {
     `💼 Role: ${lead.role}`,
     `🏢 Company: ${lead.company}`,
     `📧 Email: ${lead.email}`,
+    `💬 WhatsApp / Telegram: ${lead.messengerContact}`,
     `⚙️ Service: ${lead.service}`,
     `💰 Budget: ${lead.budget}`,
     `📅 Timeline: ${lead.timeline}`,

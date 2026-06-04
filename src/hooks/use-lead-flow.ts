@@ -101,6 +101,13 @@ export function useLeadFlow() {
           break;
         }
         case "email":
+          pushBot(
+            "bot-dark",
+            "How can we also reach you on WhatsApp or Telegram?",
+          );
+          setStep("messenger");
+          break;
+        case "messenger":
           pushBot("bot-light", "Perfect, thanks!");
           pushBot("bot-dark", "How may I help you today?");
           setStep("service");
@@ -176,8 +183,25 @@ export function useLeadFlow() {
       setAnswers(next);
       setTextInput("");
       advanceAfterAnswer("email", trimmed, next);
+      return;
+    }
+
+    if (step === "messenger") {
+      const next = { ...answers, messengerContact: trimmed };
+      setAnswers(next);
+      setTextInput("");
+      advanceAfterAnswer("messenger", trimmed, next);
     }
   }, [advanceAfterAnswer, answers, status, step, textInput]);
+
+  const skipMessenger = useCallback(() => {
+    if (status !== "active" || step !== "messenger") return;
+    setError(null);
+    setTextInput("");
+    const next = { ...answers, messengerContact: "Email only" };
+    setAnswers(next);
+    advanceAfterAnswer("messenger", "Email only", next);
+  }, [advanceAfterAnswer, answers, status, step]);
 
   const submitChoiceStep = useCallback(() => {
     if (status !== "active") return;
@@ -244,6 +268,7 @@ export function useLeadFlow() {
     resetFlow,
     submitTextStep,
     submitChoiceStep,
+    skipMessenger,
     userInitial,
   };
 }
