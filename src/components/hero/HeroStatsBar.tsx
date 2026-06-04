@@ -1,6 +1,6 @@
 const STATS = [
   { value: "410+", label: "Tech professionals" },
-  { value: "€11M", label: "Invested" },
+  { value: "$11M", label: "Invested" },
   { value: "100", label: "Deals made" },
   { value: "2.5", label: "years" },
 ] as const;
