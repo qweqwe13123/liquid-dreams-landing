@@ -19,7 +19,7 @@ export function useAutoplayVideo(
   const mobileImmediate = playImmediatelyOnMobile && isMobile;
 
   const isInView = useInView(containerRef, {
-    margin: rootMargin,
+    margin: rootMargin as `${number}${"px" | "%"}` | `${number}${"px" | "%"} ${number}${"px" | "%"}` | `${number}${"px" | "%"} ${number}${"px" | "%"} ${number}${"px" | "%"} ${number}${"px" | "%"}`,
     amount,
   });
 
