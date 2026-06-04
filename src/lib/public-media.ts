@@ -5,9 +5,9 @@ function publicPath(...segments: string[]): string {
 
 /** Full-size project showcase videos (Projects section). */
 export const PROJECT_VIDEOS = {
-  project1: publicPath("Video Project 1.mp4"),
-  project2: publicPath("Video Project 1 copy.mp4"),
-  project3: publicPath("copy_8F24B367-2150-405E-BFE2-44EAB65AE0B8.mp4"),
+  project1: publicPath("videos", "Video Project 1.mp4"),
+  project2: publicPath("videos", "Video Project 1 copy.mp4"),
+  project3: publicPath("videos", "copy_8F24B367-2150-405E-BFE2-44EAB65AE0B8.mp4"),
 } as const;
 
 /** Short-form preview videos (marquee / shorts section). */
