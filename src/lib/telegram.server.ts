@@ -1,8 +1,9 @@
 import type { LeadPayload } from "./lead-schema";
 
-import { env } from "./env.server";
+import { getTelegramEnv } from "./env.server";
 
 function getTelegramConfig() {
+  const env = getTelegramEnv();
   const token = env.TELEGRAM_BOT_TOKEN;
   const chatId = env.TELEGRAM_CHAT_ID;
 

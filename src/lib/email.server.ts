@@ -1,12 +1,13 @@
 import { Resend } from "resend";
 import { BRAND } from "./stripe-config";
 
-import { env } from "./env.server";
+import { getResendEnv } from "./env.server";
 
 let _resend: Resend | null = null;
 
 function resend(): Resend {
   if (_resend) return _resend;
+  const env = getResendEnv();
   _resend = new Resend(env.RESEND_API_KEY);
   return _resend;
 }
@@ -99,8 +100,14 @@ export async function sendPaymentConfirmationEmail(opts: {
   receiptUrl?: string | null;
 }) {
   const links: string[] = [];
-  if (opts.receiptUrl) links.push(`<a href="${opts.receiptUrl}" style="color:${BRAND.color};">View receipt</a>`);
-  if (opts.invoiceUrl) links.push(`<a href="${opts.invoiceUrl}" style="color:${BRAND.color};">Download invoice (PDF)</a>`);
+  if (opts.receiptUrl) {
+    links.push(`<a href="${opts.receiptUrl}" style="color:${BRAND.color};">View receipt</a>`);
+  }
+  if (opts.invoiceUrl) {
+    links.push(
+      `<a href="${opts.invoiceUrl}" style="color:${BRAND.color};">Download invoice (PDF)</a>`,
+    );
+  }
 
   return send({
     to: opts.to,
