@@ -1,6 +1,7 @@
+import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Check, Sparkles } from "lucide-react";
-import { CONTACT_EMAIL, WHATSAPP_WA_ME } from "@/lib/contact";
+import type { PlanId } from "@/lib/stripe-config";
 
 type Billing = "monthly" | "annually";
 
@@ -51,17 +52,11 @@ const PLANS: readonly Plan[] = [
   },
 ] as const;
 
-function planWhatsAppUrl(planName: string, price: number, billing: Billing) {
-  const period = billing === "annually" ? "annually (20% off)" : "monthly";
-  const text = encodeURIComponent(
-    `Hi, I'm interested in the ${planName} plan ($${price}/mo, ${period}).`,
-  );
-  return `https://wa.me/${WHATSAPP_WA_ME}?text=${text}`;
-}
-
-function planEmailUrl(planName: string, price: number) {
-  const subject = encodeURIComponent(`Solver ${planName} Plan ($${price}/mo)`);
-  return `mailto:${CONTACT_EMAIL}?subject=${subject}`;
+function checkoutSearch(planId: PlanId, billing: Billing) {
+  return {
+    plan: planId,
+    period: billing,
+  } as const;
 }
 
 function displayPrice(monthlyPrice: number, billing: Billing) {
@@ -143,10 +138,9 @@ export function PricingSection() {
                     <p className="mt-1 text-xs text-[#9ca3af]">Billed annually</p>
                   ) : null}
 
-                  <a
-                    href={planWhatsAppUrl(plan.name, price, billing)}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <Link
+                    to="/checkout"
+                    search={checkoutSearch(plan.id as PlanId, billing)}
                     className={`mt-6 flex w-full items-center justify-center rounded-xl py-3 text-sm font-semibold transition-colors ${
                       plan.recommended
                         ? "bg-[#2563eb] text-white hover:bg-[#1d4ed8]"
@@ -154,7 +148,7 @@ export function PricingSection() {
                     }`}
                   >
                     Get Started
-                  </a>
+                  </Link>
 
                   <div className="my-6 h-px bg-[#e5e7eb]" />
 
@@ -169,13 +163,6 @@ export function PricingSection() {
                       </li>
                     ))}
                   </ul>
-
-                  <a
-                    href={planEmailUrl(plan.name, price)}
-                    className="mt-6 text-center text-xs text-[#9ca3af] transition-colors hover:text-[#2563eb]"
-                  >
-                    Or email us about {plan.name}
-                  </a>
                 </div>
               </article>
             );

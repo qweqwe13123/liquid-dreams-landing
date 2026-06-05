@@ -15,8 +15,13 @@ import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ReachUsRouteImport } from './routes/reach-us'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CheckoutSuccessRouteImport } from './routes/checkout/success'
 import { Route as ApiLeadRouteImport } from './routes/api/lead'
+import { Route as AccountBillingRouteImport } from './routes/account/billing'
+import { Route as ApiStripeWebhookRouteImport } from './routes/api/stripe/webhook'
 
 const TermsOfUseRoute = TermsOfUseRouteImport.update({
   id: '/terms-of-use',
@@ -48,90 +53,149 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const CheckoutSuccessRoute = CheckoutSuccessRouteImport.update({
+  id: '/success',
+  path: '/success',
+  getParentRoute: () => CheckoutRoute,
 } as any)
 const ApiLeadRoute = ApiLeadRouteImport.update({
   id: '/api/lead',
   path: '/api/lead',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AccountBillingRoute = AccountBillingRouteImport.update({
+  id: '/account/billing',
+  path: '/account/billing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiStripeWebhookRoute = ApiStripeWebhookRouteImport.update({
+  id: '/api/stripe/webhook',
+  path: '/api/stripe/webhook',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/checkout': typeof CheckoutRouteWithChildren
   '/contact': typeof ContactRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/reach-us': typeof ReachUsRoute
   '/services': typeof ServicesRoute
   '/subscriptions': typeof SubscriptionsRoute
   '/terms-of-use': typeof TermsOfUseRoute
+  '/account/billing': typeof AccountBillingRoute
   '/api/lead': typeof ApiLeadRoute
+  '/checkout/success': typeof CheckoutSuccessRoute
+  '/api/stripe/webhook': typeof ApiStripeWebhookRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/checkout': typeof CheckoutRouteWithChildren
   '/contact': typeof ContactRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/reach-us': typeof ReachUsRoute
   '/services': typeof ServicesRoute
   '/subscriptions': typeof SubscriptionsRoute
   '/terms-of-use': typeof TermsOfUseRoute
+  '/account/billing': typeof AccountBillingRoute
   '/api/lead': typeof ApiLeadRoute
+  '/checkout/success': typeof CheckoutSuccessRoute
+  '/api/stripe/webhook': typeof ApiStripeWebhookRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/checkout': typeof CheckoutRouteWithChildren
   '/contact': typeof ContactRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/reach-us': typeof ReachUsRoute
   '/services': typeof ServicesRoute
   '/subscriptions': typeof SubscriptionsRoute
   '/terms-of-use': typeof TermsOfUseRoute
+  '/account/billing': typeof AccountBillingRoute
   '/api/lead': typeof ApiLeadRoute
+  '/checkout/success': typeof CheckoutSuccessRoute
+  '/api/stripe/webhook': typeof ApiStripeWebhookRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/auth'
+    | '/checkout'
     | '/contact'
     | '/privacy-policy'
     | '/reach-us'
     | '/services'
     | '/subscriptions'
     | '/terms-of-use'
+    | '/account/billing'
     | '/api/lead'
+    | '/checkout/success'
+    | '/api/stripe/webhook'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/auth'
+    | '/checkout'
     | '/contact'
     | '/privacy-policy'
     | '/reach-us'
     | '/services'
     | '/subscriptions'
     | '/terms-of-use'
+    | '/account/billing'
     | '/api/lead'
+    | '/checkout/success'
+    | '/api/stripe/webhook'
   id:
     | '__root__'
     | '/'
+    | '/auth'
+    | '/checkout'
     | '/contact'
     | '/privacy-policy'
     | '/reach-us'
     | '/services'
     | '/subscriptions'
     | '/terms-of-use'
+    | '/account/billing'
     | '/api/lead'
+    | '/checkout/success'
+    | '/api/stripe/webhook'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthRoute: typeof AuthRoute
+  CheckoutRoute: typeof CheckoutRouteWithChildren
   ContactRoute: typeof ContactRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   ReachUsRoute: typeof ReachUsRoute
   ServicesRoute: typeof ServicesRoute
   SubscriptionsRoute: typeof SubscriptionsRoute
   TermsOfUseRoute: typeof TermsOfUseRoute
+  AccountBillingRoute: typeof AccountBillingRoute
   ApiLeadRoute: typeof ApiLeadRoute
+  ApiStripeWebhookRoute: typeof ApiStripeWebhookRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -178,12 +242,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/checkout/success': {
+      id: '/checkout/success'
+      path: '/success'
+      fullPath: '/checkout/success'
+      preLoaderRoute: typeof CheckoutSuccessRouteImport
+      parentRoute: typeof CheckoutRoute
     }
     '/api/lead': {
       id: '/api/lead'
@@ -192,18 +277,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiLeadRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/account/billing': {
+      id: '/account/billing'
+      path: '/account/billing'
+      fullPath: '/account/billing'
+      preLoaderRoute: typeof AccountBillingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/stripe/webhook': {
+      id: '/api/stripe/webhook'
+      path: '/api/stripe/webhook'
+      fullPath: '/api/stripe/webhook'
+      preLoaderRoute: typeof ApiStripeWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
+interface CheckoutRouteChildren {
+  CheckoutSuccessRoute: typeof CheckoutSuccessRoute
+}
+
+const CheckoutRouteChildren: CheckoutRouteChildren = {
+  CheckoutSuccessRoute: CheckoutSuccessRoute,
+}
+
+const CheckoutRouteWithChildren = CheckoutRoute._addFileChildren(
+  CheckoutRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthRoute: AuthRoute,
+  CheckoutRoute: CheckoutRouteWithChildren,
   ContactRoute: ContactRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
   ReachUsRoute: ReachUsRoute,
   ServicesRoute: ServicesRoute,
   SubscriptionsRoute: SubscriptionsRoute,
   TermsOfUseRoute: TermsOfUseRoute,
+  AccountBillingRoute: AccountBillingRoute,
   ApiLeadRoute: ApiLeadRoute,
+  ApiStripeWebhookRoute: ApiStripeWebhookRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

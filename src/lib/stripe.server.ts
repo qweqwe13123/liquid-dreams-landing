@@ -16,3 +16,9 @@ export function getStripePublishableKey(): string {
   if (!key) throw new Error("STRIPE_PUBLISHABLE_KEY is not configured");
   return key;
 }
+
+export function getStripeWebhookSecret(): string {
+  const secret = process.env.STRIPE_WEBHOOK_SECRET;
+  if (!secret) throw new Error("STRIPE_WEBHOOK_SECRET is not configured");
+  return secret;
+}
