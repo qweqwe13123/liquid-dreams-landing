@@ -37,8 +37,8 @@ function CheckoutSuccessPage() {
           You&apos;re in. Your subscription is being synced now.
         </h1>
         <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[#6f665c]">
-          Stripe has processed the checkout and the webhook will update your Solver account, subscription
-          record, and payment history automatically.
+          Stripe has processed the checkout. We&apos;ll send a thank-you email to the address you
+          entered, and the webhook will update your subscription record automatically.
         </p>
 
         <div className="mt-8 flex flex-wrap gap-3">

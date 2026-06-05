@@ -1,7 +1,5 @@
-import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Check, Sparkles } from "lucide-react";
-import type { PlanId } from "@/lib/stripe-config";
 
 type Billing = "monthly" | "annually";
 
@@ -51,13 +49,6 @@ const PLANS: readonly Plan[] = [
     ],
   },
 ] as const;
-
-function checkoutSearch(planId: PlanId, billing: Billing) {
-  return {
-    plan: planId,
-    period: billing,
-  } as const;
-}
 
 function displayPrice(monthlyPrice: number, billing: Billing) {
   if (billing === "monthly") return monthlyPrice;
@@ -138,9 +129,8 @@ export function PricingSection() {
                     <p className="mt-1 text-xs text-[#9ca3af]">Billed annually</p>
                   ) : null}
 
-                  <Link
-                    to="/checkout"
-                    search={checkoutSearch(plan.id as PlanId, billing)}
+                  <a
+                    href={`/api/stripe/checkout?plan=${plan.id}&period=${billing}`}
                     className={`mt-6 flex w-full items-center justify-center rounded-xl py-3 text-sm font-semibold transition-colors ${
                       plan.recommended
                         ? "bg-[#2563eb] text-white hover:bg-[#1d4ed8]"
@@ -148,7 +138,7 @@ export function PricingSection() {
                     }`}
                   >
                     Get Started
-                  </Link>
+                  </a>
 
                   <div className="my-6 h-px bg-[#e5e7eb]" />
 

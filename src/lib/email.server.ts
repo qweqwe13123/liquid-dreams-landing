@@ -74,17 +74,16 @@ async function send(opts: { to: string; subject: string; html: string }) {
 // Email templates
 // ============================================================
 
-export async function sendWelcomeEmail(to: string, planName: string) {
+export async function sendPurchaseThankYouEmail(to: string, planName: string) {
   return send({
     to,
-    subject: `Welcome to ${BRAND.name} ${planName} 👋`,
+    subject: `Thanks for your order — ${BRAND.name} ${planName}`,
     html: shell(
-      "Welcome",
-      `<h1 style="font-size:22px;margin:0 0 16px 0;color:${BRAND.color};">Welcome aboard!</h1>
-       <p>Thanks for subscribing to <strong>${BRAND.name} ${planName}</strong>. We're thrilled to have you.</p>
-       <p>You can manage your subscription, update payment methods, and view receipts from your account at any time.</p>
-       ${button(`${BRAND.websiteUrl}/account/billing`, "Open my account")}
-       <p style="color:#6b7280;font-size:13px;">If you have questions, just reply to this email — we read every message.</p>
+      "Thank you",
+      `<h1 style="font-size:22px;margin:0 0 16px 0;color:${BRAND.color};">Payment received, thank you!</h1>
+       <p>We&apos;ve received your payment for <strong>${BRAND.name} ${planName}</strong>.</p>
+       <p>Your subscription is now active, and you&apos;ll keep receiving service updates and renewal notices here.</p>
+       <p style="color:#6b7280;font-size:13px;">If you have questions or need help, just reply to this email. We read every message.</p>
        <p style="margin-top:32px;">— The ${BRAND.name} team</p>`,
     ),
   });

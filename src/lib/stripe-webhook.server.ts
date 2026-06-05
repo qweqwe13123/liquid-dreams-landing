@@ -6,7 +6,7 @@ import {
   sendPaymentConfirmationEmail,
   sendPaymentFailedEmail,
   sendRenewalEmail,
-  sendWelcomeEmail,
+  sendPurchaseThankYouEmail,
 } from "@/lib/email.server";
 import { PLANS, priceIdToPlanId, type BillingPeriod, type PlanId } from "@/lib/stripe-config";
 import { getStripe, getStripeWebhookSecret } from "@/lib/stripe.server";
@@ -46,14 +46,6 @@ function getCustomerId(
   return typeof customer === "string" ? customer : customer.id;
 }
 
-function getCustomerEmail(
-  customer: string | Stripe.Customer | Stripe.DeletedCustomer | null | undefined,
-): string | null {
-  if (!customer || typeof customer === "string") return null;
-  if ("email" in customer) return customer.email ?? null;
-  return null;
-}
-
 async function getProfileByCustomerId(customerId: string): Promise<ProfileRow | null> {
   const { data, error } = await supabaseAdmin
     .from("profiles")
@@ -69,6 +61,16 @@ async function getProfileByUserId(userId: string): Promise<ProfileRow | null> {
     .from("profiles")
     .select("id, email, full_name, stripe_customer_id")
     .eq("id", userId)
+    .maybeSingle();
+  if (error) throw new Error(error.message);
+  return data as ProfileRow | null;
+}
+
+async function getProfileByEmail(email: string): Promise<ProfileRow | null> {
+  const { data, error } = await supabaseAdmin
+    .from("profiles")
+    .select("id, email, full_name, stripe_customer_id")
+    .eq("email", email)
     .maybeSingle();
   if (error) throw new Error(error.message);
   return data as ProfileRow | null;
@@ -94,7 +96,46 @@ async function resolveUserContext(
   if (!stripeCustomerId) return { userId: null, profile: null };
 
   const profile = await getProfileByCustomerId(stripeCustomerId);
-  return { userId: profile?.id ?? null, profile };
+  if (profile) {
+    return { userId: profile.id, profile };
+  }
+
+  const customer = await getStripe().customers.retrieve(stripeCustomerId);
+  if (customer && !("deleted" in customer) && customer.email) {
+    const createdProfile = await resolveOrCreateUserByEmail(customer.email, customer.name ?? null);
+    return { userId: createdProfile.id, profile: createdProfile };
+  }
+
+  return { userId: null, profile: null };
+}
+
+async function resolveOrCreateUserByEmail(email: string, fullName: string | null) {
+  const existingProfile = await getProfileByEmail(email);
+  if (existingProfile) {
+    return existingProfile;
+  }
+
+  const { data, error } = await supabaseAdmin.auth.admin.createUser({
+    email,
+    email_confirm: true,
+    user_metadata: fullName ? { full_name: fullName } : undefined,
+  });
+
+  if (error || !data.user) {
+    throw new Error(error?.message ?? "Unable to create billing user.");
+  }
+
+  const createdProfile = await getProfileByUserId(data.user.id);
+  if (createdProfile) return createdProfile;
+
+  const { data: fallbackProfile, error: fallbackError } = await supabaseAdmin
+    .from("profiles")
+    .select("id, email, full_name, stripe_customer_id")
+    .eq("id", data.user.id)
+    .maybeSingle();
+  if (fallbackError) throw new Error(fallbackError.message);
+  if (!fallbackProfile) throw new Error("Created profile not found.");
+  return fallbackProfile as ProfileRow;
 }
 
 async function upsertSubscriptionRow(subscription: Stripe.Subscription) {
@@ -215,13 +256,26 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   const subscriptionId =
     typeof session.subscription === "string" ? session.subscription : session.subscription.id;
   const checkoutEmail = session.customer_details?.email ?? session.customer_email ?? null;
-  const synced = await upsertSubscriptionRow(await stripe.subscriptions.retrieve(subscriptionId));
+  const checkoutName = session.customer_details?.name ?? null;
+  if (!checkoutEmail) {
+    throw new Error("Checkout completed without customer email.");
+  }
+
+  const profile = await resolveOrCreateUserByEmail(checkoutEmail, checkoutName);
+  const subscription = await stripe.subscriptions.update(subscriptionId, {
+    metadata: {
+      user_id: profile.id,
+      plan: session.metadata?.plan ?? "",
+      billing_period: session.metadata?.billing_period ?? "",
+    },
+  });
+  const synced = await upsertSubscriptionRow(subscription);
 
   const email =
-    checkoutEmail ?? synced.profile?.email ?? (await getStripeCustomerEmail(synced.customerId));
+    profile.email ?? synced.profile?.email ?? (await getStripeCustomerEmail(synced.customerId));
 
   if (email) {
-    await sendWelcomeEmail(email, PLANS[synced.plan].name);
+    await sendPurchaseThankYouEmail(email, PLANS[synced.plan].name);
   }
 }
 
