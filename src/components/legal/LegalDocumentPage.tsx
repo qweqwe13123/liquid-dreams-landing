@@ -3,6 +3,7 @@ type LegalSection = {
   paragraphs: readonly string[];
   list?: readonly string[];
   email?: string;
+  website?: string;
 };
 
 type LegalDocument = {
@@ -71,6 +72,19 @@ export function LegalDocumentPage({ document }: { document: LegalDocument }) {
                     className="text-white underline-offset-2 hover:underline"
                   >
                     {section.email}
+                  </a>
+                </p>
+              ) : null}
+              {section.website ? (
+                <p className="text-[15px] leading-[1.75]" style={{ color: BODY }}>
+                  Website:{" "}
+                  <a
+                    href={`https://${section.website}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white underline-offset-2 hover:underline"
+                  >
+                    {section.website}
                   </a>
                 </p>
               ) : null}

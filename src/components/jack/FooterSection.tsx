@@ -79,6 +79,9 @@ export function FooterSection() {
             <Link to="/terms-of-use" className="transition hover:text-white">
               Terms of Use
             </Link>
+            <Link to="/refund-policy" className="transition hover:text-white">
+              Refund Policy
+            </Link>
           </FooterColumn>
 
           <div className="flex flex-col items-start gap-6 max-lg:col-span-2 sm:col-span-2 lg:col-span-1 lg:items-end lg:text-right">

@@ -13,6 +13,7 @@ import { Route as TermsOfUseRouteImport } from './routes/terms-of-use'
 import { Route as SubscriptionsRouteImport } from './routes/subscriptions'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ReachUsRouteImport } from './routes/reach-us'
+import { Route as RefundPolicyRouteImport } from './routes/refund-policy'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CheckoutRouteImport } from './routes/checkout'
@@ -47,6 +48,11 @@ const ReachUsRoute = ReachUsRouteImport.update({
 const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
   id: '/privacy-policy',
   path: '/privacy-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RefundPolicyRoute = RefundPolicyRouteImport.update({
+  id: '/refund-policy',
+  path: '/refund-policy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -102,6 +108,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/reach-us': typeof ReachUsRoute
+  '/refund-policy': typeof RefundPolicyRoute
   '/services': typeof ServicesRoute
   '/subscriptions': typeof SubscriptionsRoute
   '/terms-of-use': typeof TermsOfUseRoute
@@ -118,6 +125,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/reach-us': typeof ReachUsRoute
+  '/refund-policy': typeof RefundPolicyRoute
   '/services': typeof ServicesRoute
   '/subscriptions': typeof SubscriptionsRoute
   '/terms-of-use': typeof TermsOfUseRoute
@@ -135,6 +143,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/reach-us': typeof ReachUsRoute
+  '/refund-policy': typeof RefundPolicyRoute
   '/services': typeof ServicesRoute
   '/subscriptions': typeof SubscriptionsRoute
   '/terms-of-use': typeof TermsOfUseRoute
@@ -153,6 +162,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/privacy-policy'
     | '/reach-us'
+    | '/refund-policy'
     | '/services'
     | '/subscriptions'
     | '/terms-of-use'
@@ -169,6 +179,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/privacy-policy'
     | '/reach-us'
+    | '/refund-policy'
     | '/services'
     | '/subscriptions'
     | '/terms-of-use'
@@ -185,6 +196,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/privacy-policy'
     | '/reach-us'
+    | '/refund-policy'
     | '/services'
     | '/subscriptions'
     | '/terms-of-use'
@@ -202,6 +214,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   ReachUsRoute: typeof ReachUsRoute
+  RefundPolicyRoute: typeof RefundPolicyRoute
   ServicesRoute: typeof ServicesRoute
   SubscriptionsRoute: typeof SubscriptionsRoute
   TermsOfUseRoute: typeof TermsOfUseRoute
@@ -239,6 +252,13 @@ declare module '@tanstack/react-router' {
       path: '/reach-us'
       fullPath: '/reach-us'
       preLoaderRoute: typeof ReachUsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/refund-policy': {
+      id: '/refund-policy'
+      path: '/refund-policy'
+      fullPath: '/refund-policy'
+      preLoaderRoute: typeof RefundPolicyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacy-policy': {
@@ -333,6 +353,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
   ReachUsRoute: ReachUsRoute,
+  RefundPolicyRoute: RefundPolicyRoute,
   ServicesRoute: ServicesRoute,
   SubscriptionsRoute: SubscriptionsRoute,
   TermsOfUseRoute: TermsOfUseRoute,

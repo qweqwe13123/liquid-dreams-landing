@@ -37,6 +37,9 @@ export function SiteHeader({
           <Link to="/subscriptions" className={`text-sm transition-colors ${textMuted}`}>
             Subscriptions
           </Link>
+          <Link to="/refund-policy" className={`text-sm transition-colors ${textMuted}`}>
+            Refund Policy
+          </Link>
           <Link to="/contact" className={`text-sm transition-colors ${textMuted}`}>
             Reach Us
           </Link>
