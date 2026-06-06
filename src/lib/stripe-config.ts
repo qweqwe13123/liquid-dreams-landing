@@ -28,8 +28,8 @@ export const PLANS: Record<PlanId, PlanConfig> = {
       "1 active request at a time",
     ],
     prices: {
-      monthly: "price_1Teg4qFqPpInUxokAmZ8i9Ck",
-      annually: "price_1Teg4qFqPpInUxokVxEDQJ1u",
+      monthly: "price_1Tf82oFqPpInUxokl6jowzdi",
+      annually: "price_1Tf88BFqPpInUxokuJ5ysT65",
     },
   },
   pro: {
@@ -45,8 +45,8 @@ export const PLANS: Record<PlanId, PlanConfig> = {
       "Landing page & funnel tweaks",
     ],
     prices: {
-      monthly: "price_1Teg4rFqPpInUxokUH837uug",
-      annually: "price_1Teg4rFqPpInUxokWhjnZLqu",
+      monthly: "price_1Tf83hFqPpInUxokLnj2mj2D",
+      annually: "price_1Tf88BFqPpInUxokdw12Il78",
     },
   },
   ultra: {
@@ -61,8 +61,8 @@ export const PLANS: Record<PlanId, PlanConfig> = {
       "Custom automation & integrations",
     ],
     prices: {
-      monthly: "price_1Teg4rFqPpInUxokH2Bkkj4E",
-      annually: "price_1Teg4sFqPpInUxokTW9c0YdL",
+      monthly: "price_1Tf84OFqPpInUxokal3LrPpy",
+      annually: "price_1Tf88CFqPpInUxokNOUTON0h",
     },
   },
 };
