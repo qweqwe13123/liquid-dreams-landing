@@ -6,6 +6,7 @@ export async function createHostedCheckoutUrl(input: { plan: PlanId; period: Bil
   const stripe = getStripe();
   const origin = getSiteEnv().SITE_URL || "https://www.solverwebsite.com";
   const priceId = PLANS[input.plan].prices[input.period];
+  const brandingIconUrl = `${origin}/favicon.png`;
 
   const session = await stripe.checkout.sessions.create({
     mode: "subscription",
@@ -17,6 +18,17 @@ export async function createHostedCheckoutUrl(input: { plan: PlanId; period: Bil
     metadata: { plan: input.plan, billing_period: input.period },
     subscription_data: {
       metadata: { plan: input.plan, billing_period: input.period },
+    },
+    branding_settings: {
+      display_name: "Solver",
+      background_color: "#faf6f0",
+      button_color: "#2c2824",
+      border_style: "rounded",
+      font_family: "inter",
+      icon: {
+        type: "url",
+        url: brandingIconUrl,
+      },
     },
     custom_text: {
       submit: {
