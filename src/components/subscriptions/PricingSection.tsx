@@ -59,27 +59,27 @@ export function PricingSection() {
   const [billing, setBilling] = useState<Billing>("monthly");
 
   return (
-    <section className="bg-[#050505] px-4 py-16 text-white sm:px-6 sm:py-24 lg:py-28">
-      <div className="mx-auto max-w-5xl">
+    <section className="bg-white px-4 py-14 sm:px-6 sm:py-20 lg:py-24">
+      <div className="mx-auto max-w-6xl">
         <div className="mx-auto max-w-2xl text-center">
           <h1
-            className="flex flex-wrap items-center justify-center gap-2 text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-[2.75rem] lg:leading-tight"
+            className="flex flex-wrap items-center justify-center gap-2 text-3xl font-semibold tracking-tight text-[#111] sm:text-4xl lg:text-[2.75rem] lg:leading-tight"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
             Find the right
-            <Sparkles className="h-7 w-7 text-[#a3a3a3] sm:h-8 sm:w-8" aria-hidden />
+            <Sparkles className="h-7 w-7 text-[#2563eb] sm:h-8 sm:w-8" aria-hidden />
             plan for you.
           </h1>
-          <p className="mt-4 text-base text-[#a1a1aa] sm:text-lg">
+          <p className="mt-4 text-base text-[#6b7280] sm:text-lg">
             Choose a plan that fits your needs and start building today.
           </p>
 
-          <div className="mt-8 inline-flex items-center rounded-full border border-white/15 bg-white/5 p-1 backdrop-blur">
+          <div className="mt-8 inline-flex items-center rounded-full border border-[#e5e7eb] bg-[#f9fafb] p-1">
             <button
               type="button"
               onClick={() => setBilling("monthly")}
               className={`rounded-full px-5 py-2 text-sm font-medium transition-colors ${
-                billing === "monthly" ? "bg-white text-[#111]" : "text-[#a1a1aa]"
+                billing === "monthly" ? "bg-white text-[#111] shadow-sm" : "text-[#6b7280]"
               }`}
             >
               Monthly
@@ -88,81 +88,68 @@ export function PricingSection() {
               type="button"
               onClick={() => setBilling("annually")}
               className={`flex items-center gap-2 rounded-full px-5 py-2 text-sm font-medium transition-colors ${
-                billing === "annually" ? "bg-white text-[#111]" : "text-[#a1a1aa]"
+                billing === "annually" ? "bg-white text-[#111] shadow-sm" : "text-[#6b7280]"
               }`}
             >
               Annually
-              <span className="rounded-full bg-[#d1fae5] px-2 py-0.5 text-[11px] font-semibold text-[#065f46]">
+              <span className="rounded-full bg-[#dcfce7] px-2 py-0.5 text-[11px] font-semibold text-[#16a34a]">
                 Save 20%
               </span>
             </button>
           </div>
         </div>
 
-        <div className="mt-12 grid grid-cols-1 gap-5 lg:mt-16 lg:gap-6">
+        <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-3 lg:mt-14 lg:gap-6">
           {PLANS.map((plan) => {
             const price = displayPrice(plan.monthlyPrice, billing);
 
             return (
               <article
                 key={plan.id}
-                className={`relative overflow-hidden rounded-[28px] border bg-[#0b0b0b] transition-colors ${
-                  plan.recommended ? "border-white/30" : "border-white/12"
+                className={`relative flex flex-col overflow-hidden rounded-2xl border bg-[#f3f4f6] ${
+                  plan.recommended ? "border-[#2563eb]/30 shadow-md" : "border-[#e5e7eb]"
                 }`}
               >
                 {plan.recommended ? (
-                  <div className="border-b border-white/10 bg-white/5 px-6 py-3 text-center text-xs font-semibold uppercase tracking-[0.25em] text-white/70">
+                  <div className="bg-[#2563eb] py-2 text-center text-xs font-semibold uppercase tracking-wider text-white">
                     Recommended
                   </div>
                 ) : null}
 
-                <div className="flex flex-col p-6 sm:p-7 lg:p-8">
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <h2 className="text-2xl font-medium tracking-tight text-white">
-                        {plan.name}
-                      </h2>
-                      <p className="mt-2 max-w-xl text-sm leading-relaxed text-[#a1a1aa]">
-                        {plan.features[0]}
-                      </p>
-                    </div>
+                <div className="flex flex-1 flex-col p-6 sm:p-7">
+                  <h2 className="text-lg font-semibold text-[#111]">{plan.name}</h2>
 
-                    <div className="text-right">
-                      <span className="block text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-                        ${price}
-                      </span>
-                      <span className="mt-1 block text-sm text-[#a1a1aa]">
-                        {billing === "annually" ? "per year" : "per month"}
-                      </span>
-                    </div>
+                  <div className="mt-4 flex items-end gap-1">
+                    <span className="text-4xl font-bold tracking-tight text-[#111] sm:text-[2.75rem]">
+                      ${price}
+                    </span>
+                    <span className="mb-1.5 text-sm text-[#6b7280]">/month</span>
                   </div>
+                  {billing === "annually" ? (
+                    <p className="mt-1 text-xs text-[#9ca3af]">Billed annually</p>
+                  ) : null}
 
                   <a
                     href={`/api/stripe/checkout?plan=${plan.id}&period=${billing}`}
-                    className={`mt-6 inline-flex w-full items-center justify-center rounded-2xl border px-5 py-4 text-sm font-semibold transition-colors ${
+                    className={`mt-6 flex w-full items-center justify-center rounded-xl py-3 text-sm font-semibold transition-colors ${
                       plan.recommended
-                        ? "border-white bg-white text-[#111] hover:bg-[#f4f4f5]"
-                        : "border-white/15 bg-white/5 text-white hover:bg-white/10"
+                        ? "bg-[#2563eb] text-white hover:bg-[#1d4ed8]"
+                        : "border border-[#d1d5db] bg-white text-[#111] hover:bg-[#fafafa]"
                     }`}
                   >
                     Get Started
                   </a>
 
-                  <div className="my-6 h-px bg-white/10" />
+                  <div className="my-6 h-px bg-[#e5e7eb]" />
 
-                  <p className="text-sm font-medium text-white/70">Plan highlights:</p>
+                  <p className="text-sm font-medium text-[#374151]">Plan highlights:</p>
                   <ul className="mt-4 flex flex-col gap-3">
-                    {plan.features.map((feature, index) => (
-                      <li key={feature} className="flex items-start gap-2.5 text-sm text-[#d4d4d8]">
-                        <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/5">
+                    {plan.features.map((feature) => (
+                      <li key={feature} className="flex items-start gap-2.5 text-sm text-[#4b5563]">
+                        <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#22c55e]">
                           <Check className="h-2.5 w-2.5 text-white" strokeWidth={3} />
                         </span>
                         {feature}
-                        {index === 0 && billing === "annually" ? (
-                          <span className="ml-auto rounded-full bg-[#d1fae5] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.15em] text-[#065f46]">
-                            Best value
-                          </span>
-                        ) : null}
                       </li>
                     ))}
                   </ul>
